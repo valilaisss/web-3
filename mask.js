@@ -4,6 +4,8 @@ let maskImage
 function preload() {
     img = loadImage('assets/mask.png')
 }
+let windowWidth = window.innerWidth;
+let windowHeight = window.innerHeight;
 function setup() {
     myCanvas = createCanvas(windowWidth, windowHeight)
     myCanvas.parent("#canvas-parent")
@@ -13,6 +15,7 @@ function setup() {
     maskLayer.circle(600, 400, 50);
     maskLayer.circle(1000, 1000, 300);
 }
+
 function draw() {
   
     // 1. Clear the mask layer for a dynamic effect

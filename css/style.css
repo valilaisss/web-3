@@ -10,10 +10,8 @@ body{
     align-items: center;
     background-color: #C9C9C9;
 }
-canvas {
-    z-index: 999;
-    position: absolute;
-    background-image: url('assets/defaultBG.png')
+canvas{
+    background-image: url('../assets/defaultBG.png')
 }
 .first-screen{
     display: flex;
