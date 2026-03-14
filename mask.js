@@ -7,7 +7,8 @@ function preload() {
 let windowWidth = window.innerWidth;
 let windowHeight = window.innerHeight;
 function setup() {
-    createCanvas(windowWidth, windowHeight)
+    myCanvas = createCanvas(windowWidth, windowHeight)
+    myCanvas.parent("#canvas-parent")
     maskLayer = createGraphics(windowWidth, windowHeight)
     // тут нужно будет в процентах все сделать, чтобы на ресайзах норм было, потому что ширина у нас привязана к ширине экрана щас windowWidth, windowHeight
     maskLayer.circle(100, 100, 150);
