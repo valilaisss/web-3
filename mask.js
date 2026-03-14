@@ -18,7 +18,8 @@ function draw() {
     
     // 2. Draw the "visible" area on the mask
     maskLayer.fill(255); // White (or any color) defines visible areas
-    maskLayer.circle(mouseX, mouseY, 300);
+    let circleWidth = 300
+    maskLayer.circle(mouseX - circleWidth/2, mouseY - circleWidth/2, circleWidth);
   
     // 3. Create a copy of the image to mask (to avoid permanent changes)
     let maskedImg = img.get(); 
