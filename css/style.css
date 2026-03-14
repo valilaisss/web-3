@@ -11,7 +11,7 @@ body{
     background-color: #C9C9C9;
 }
 canvas{
-    background-image: url('assets/defaultBG.png')
+    background-image: url('../assets/defaultBG.png')
 }
 .first-screen{
     display: flex;
@@ -24,6 +24,19 @@ canvas{
     position:relative; 
     overflow:hidden;
     position: relative;
+}
+.second-screen{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+.illustration{
+    top: 50%;
+    transform: translateY(-50%);
+    position:absolute;
+    left: 0;
+    width: 100%;
+    height: auto;
 }
 .gray-element-1{
     position: absolute;
