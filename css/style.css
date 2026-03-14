@@ -27,6 +27,19 @@ canvas {
     overflow:hidden;
     position: relative;
 }
+.second-screen{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+.illustration{
+    top: 50%;
+    transform: translateY(-50%);
+    position:absolute;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
 .gray-element-1{
     position: absolute;
     width: 71.3vw;
