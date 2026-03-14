@@ -9,9 +9,13 @@ let windowHeight = window.innerHeight;
 function setup() {
     createCanvas(windowWidth, windowHeight)
     maskLayer = createGraphics(windowWidth, windowHeight)
+    // тут нужно будет в процентах все сделать, чтобы на ресайзах норм было, потому что ширина у нас привязана к ширине экрана щас windowWidth, windowHeight
+    maskLayer.circle(100, 100, 150);
+    maskLayer.circle(600, 400, 50);
+    maskLayer.circle(1000, 1000, 300);
 }
+
 function draw() {
-    background(255);
   
     // 1. Clear the mask layer for a dynamic effect
     // maskLayer.clear();

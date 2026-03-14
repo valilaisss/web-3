@@ -10,6 +10,9 @@ body{
     align-items: center;
     background-color: #C9C9C9;
 }
+canvas{
+    background-image: url('assets/defaultBG.png')
+}
 .first-screen{
     display: flex;
     touch-action: none;
