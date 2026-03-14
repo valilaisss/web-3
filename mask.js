@@ -1,12 +1,14 @@
-let photo
+let img
 let maskImage
 
 function preload() {
-    photo = loadImage('assets/mask.png')
+    img = loadImage('assets/mask.png')
 }
+let windowWidth = window.innerWidth;
+let windowHeight = window.innerHeight;
 function setup() {
-    createCanvas(400, 400)
-    maskLayer = createGraphics(400, 400)
+    createCanvas(windowWidth, windowHeight)
+    maskLayer = createGraphics(windowWidth, windowHeight)
 }
 function draw() {
     background(255);
@@ -16,7 +18,7 @@ function draw() {
     
     // 2. Draw the "visible" area on the mask
     maskLayer.fill(255); // White (or any color) defines visible areas
-    maskLayer.circle(mouseX, mouseY, 150);
+    maskLayer.circle(mouseX, mouseY, 300);
   
     // 3. Create a copy of the image to mask (to avoid permanent changes)
     let maskedImg = img.get(); 
