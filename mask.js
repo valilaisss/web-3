@@ -2,8 +2,7 @@ let photo
 let maskImage
 
 function preload() {
-    photo = loadImage('/assets/mask.png')
-    photo = loadImage('/assets/mask.png')
+    photo = loadImage('web-3/assets/mask.png')
 }
 function setup() {
     createCanvas(400, 400)
