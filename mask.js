@@ -14,7 +14,7 @@ function draw() {
     background(255);
   
     // 1. Clear the mask layer for a dynamic effect
-    maskLayer.clear();
+    // maskLayer.clear();
     
     // 2. Draw the "visible" area on the mask
     maskLayer.fill(255); // White (or any color) defines visible areas
