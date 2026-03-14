@@ -1,3 +1,123 @@
 @import url('reset.css');
 @import url('font.css');
 @import url('animation.css');
+
+body{
+    font-family: 'IBM Plex Sans', sans-serif;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #C9C9C9;
+}
+.first-screen{
+    display: flex;
+    touch-action: none;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    position:relative; 
+    overflow:hidden;
+    position: relative;
+}
+.gray-element-1{
+    position: absolute;
+    width: 71.3vw;
+    height: 23.18vw;
+    z-index: 0;
+}
+.elipse-center{
+    position: absolute;
+    width: 36vw;
+    height: 36vw;
+    z-index: 1;
+}
+.elipse{
+    top: 50%;
+    transform: translateY(-50%);
+}
+.elipse-right{
+    position: absolute;
+    width: 36vw;
+    height: 36vw;
+    left: 50.1vw;
+    z-index: 1;
+}
+.elipse-left{
+    position: absolute;
+    width: 36vw;
+    height: 36vw;
+    left: 13.95vw;
+    z-index: 1;
+}
+.elipse-small-right{
+    position: absolute;
+    width: 27.29vw;
+    height: 27.29vw;
+    left: 50vw;
+    z-index: 1;
+}
+.elipse-small-left{
+    position: absolute;
+    width: 27.29vw;
+    height: 27.29vw;
+    left: 22.7vw;
+    z-index: 1;
+}
+.bg-nap{
+    position: absolute;
+    z-index: 9;
+    cursor:pointer;
+    font-size: 3.28vw;
+    height: 44px;
+    font-weight: 600;
+    color: #3F3F3F;
+    background-color: #ffffff;
+    padding-bottom: 4px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.stamp{
+    position:absolute;
+    width:226px;
+    height: 146px;
+    pointer-events:none;
+    opacity:0; 
+    transform: scale(0.5);
+    transition: opacity 0.5s, transform 0.5s;
+    z-index:2;
+  }
+
+
+.first-screen img, .first-screen .bg-nap  { pointer-events: none; }
+
+
+  #nap-word{
+    pointer-events: auto;
+    cursor: pointer;
+    user-select: none;
+    font-size: 64px;
+    text-box-edge: cap alphabetic;
+    text-box-trim: trim-both;
+  }
+
+  .active-sleep-box {
+    position: absolute;
+    width: 795px;
+    height: fit-content;
+    background: white;
+    font-size: 30px;
+    color: #3F3F3F;
+    font-weight: 600;
+    line-height: 39px;
+    letter-spacing: -3%;
+    user-select: none;
+    z-index: 10;
+    cursor: pointer;
+    opacity:0; 
+    transform: scale(0.5);
+    transition: opacity 0.5s, transform 0.5s;
+  }
