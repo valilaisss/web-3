@@ -3,33 +3,56 @@ let maskImage
 
 function preload() {
     img = loadImage('assets/mask.png')
-    
 }
+
 function setup() {
-    const containerWidth = document.querySelector('#canvas-parent').clientWidth;
-    const containerHeight = windowHeight;
-    myCanvas = createCanvas(containerWidth, containerHeight);
-    myCanvas.parent("#canvas-parent");
-    maskLayer = createGraphics(containerWidth, containerHeight);
-    // тут нужно будет в процентах все сделать, чтобы на ресайзах норм было, потому что ширина у нас привязана к ширине экрана щас windowWidth, windowHeight
-    maskLayer.circle(100, 100, 150);
-    maskLayer.circle(600, 400, 50);
-    maskLayer.circle(1000, 1000, 300);
-}
-function draw() {
-  
-    // 1. Clear the mask layer for a dynamic effect
-    // maskLayer.clear();
+    windowWidth = window.innerWidth;
+    windowHeight = window.innerHeight;
     
-    // 2. Draw the "visible" area on the mask
-    maskLayer.fill(255); // White (or any color) defines visible areas
-    let circleWidth = 300
-    maskLayer.circle(mouseX - circleWidth/2, mouseY - circleWidth/2, circleWidth);
-  
-    // 3. Create a copy of the image to mask (to avoid permanent changes)
+    myCanvas = createCanvas(windowWidth, windowHeight)
+    myCanvas.parent("#canvas-parent")
+    maskLayer = createGraphics(windowWidth, windowHeight)
+    
+    // ВСЕ В ПРОЦЕНТАХ!
+    // Круг в центре (50% ширины, 30% высоты)
+    maskLayer.circle(windowWidth * 0.5, windowHeight * 0.3, windowWidth * 0.1); // 10% от ширины
+    
+    // Круг слева (20% ширины, 50% высоты)
+    maskLayer.circle(windowWidth * 0.2, windowHeight * 0.5, windowWidth * 0.03); // 3% от ширины
+    
+    // Круг справа (80% ширины, 80% высоты)
+    maskLayer.circle(windowWidth * 0.8, windowHeight * 0.8, windowWidth * 0.2); // 20% от ширины
+}
+
+function draw() {
+    // Очищаем маску для динамического эффекта
+    maskLayer.clear();
+    
+    // Сначала рисуем статические круги (проценты от текущего размера окна)
+    maskLayer.fill(255);
+    maskLayer.circle(width * 0.5, height * 0.3, width * 0.1);
+    maskLayer.circle(width * 0.2, height * 0.5, width * 0.03);
+    maskLayer.circle(width * 0.8, height * 0.8, width * 0.2);
+    
+    // Рисуем динамическую область (за мышкой) - тоже в процентах
+    let circleWidth = width * 0.15; // 15% от ширины экрана
+    maskLayer.circle(mouseX, mouseY, circleWidth);
+    
+    // Применяем маску
     let maskedImg = img.get(); 
-    maskedImg.mask(maskLayer); //
-  
-    // 4. Draw the result
-    image(maskedImg, 0, 0);
-  }
+    maskedImg.mask(maskLayer);
+    
+    // Рисуем результат
+    image(maskedImg, 0, 0, width, height);
+}
+
+// Добавляем обработчик ресайза
+window.addEventListener('resize', () => {
+    resizeCanvas(window.innerWidth, window.innerHeight);
+    
+    // Пересоздаем маску с новыми размерами
+    maskLayer = createGraphics(width, height);
+    
+    // Все круги пересчитываются автоматически в draw()
+    redraw();
+});
