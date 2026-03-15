@@ -15,7 +15,7 @@ function setup() {
     
     // ВСЕ В ПРОЦЕНТАХ!
     // Круг в центре (50% ширины, 30% высоты)
-    maskLayer.circle(windowWidth * 0.5, windowHeight * 0.3, windowWidth * 0.1); // 10% от ширины
+    maskLayer.circle(width * 0.2057, height * 0.2463, width * 0.2948);
     
     // Круг слева (20% ширины, 50% высоты)
     maskLayer.circle(windowWidth * 0.2, windowHeight * 0.5, windowWidth * 0.03); // 3% от ширины
@@ -30,7 +30,7 @@ function draw() {
     
     // Сначала рисуем статические круги (проценты от текущего размера окна)
     maskLayer.fill(255);
-    maskLayer.circle(width * 0.5, height * 0.3, width * 0.1);
+    maskLayer.circle(width * 0.2057, height * 0.2463, width * 0.2948);
     maskLayer.circle(width * 0.2, height * 0.5, width * 0.03);
     maskLayer.circle(width * 0.8, height * 0.8, width * 0.2);
     
