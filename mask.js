@@ -15,7 +15,7 @@ function setup() {
     
     // ВСЕ В ПРОЦЕНТАХ!
     // Круг в центре (50% ширины, 30% высоты)
-    maskLayer.circle(width * 0.2057, height * 0.2463, width * 0.2948);
+    maskLayer.circle(windowWidth  * 0.2057, windowHeight * 0.2463, windowWidth * 0.2948);
     
     // Круг слева (20% ширины, 50% высоты)
     maskLayer.circle(windowWidth * 0.2, windowHeight * 0.5, windowWidth * 0.03); // 3% от ширины
