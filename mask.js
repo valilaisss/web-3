@@ -19,21 +19,21 @@ function draw() {
     maskLayer.fill(255);
     
     maskLayer.circle(
-        width * 0.2057,
-        height * 0.2463,
+        width * 0.3531,
+        height * 0.5083,
         width * 0.2948
     );
     
     maskLayer.circle(
-        width * 0.3125,
-        height * 0.3704,
-        width * 0.0260
+        width * 0.6055,
+        height * 0.2912,
+        width * 0.2026
     );
     
     maskLayer.circle(
-        width * 0.5208,
-        height * 0.9259,
-        width * 0.1563
+        width * 0.9797,
+        height * 0.8176,
+        width * 0.1073
     );
     
     let circleWidth = width * 0.15;
