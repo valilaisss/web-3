@@ -4,7 +4,7 @@ let revealed = false;
 
 function preload() {
     img = loadImage('assets/mask.png')
-    secondImg = loadImage('assets/secondScreen.png')
+    secondImg = loadImage('assets/_ (37).jpeg')
 }
 
 function setup() {
