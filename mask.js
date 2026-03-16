@@ -1,5 +1,4 @@
-let img
-let maskImage
+let img;
 
 function preload() {
     img = loadImage('assets/mask.png')

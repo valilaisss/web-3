@@ -43,6 +43,7 @@ canvas {
     left: 0;
     width: 100%;
     height: auto;
+    z-index: 1;
 }
 .gray-element-1{
     position: absolute;
