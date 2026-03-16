@@ -1,7 +1,10 @@
 let img;
+let secondImg;
+let revealed = false;
 
 function preload() {
     img = loadImage('assets/mask.png')
+    secondImg = loadImage('assets/secondScreen.png')
 }
 
 function setup() {
@@ -57,6 +60,11 @@ function draw() {
     
     // Рисуем результат
     image(maskedImg, 0, 0, width, height);
+
+    checkCanvasFill()
+    if (revealed) {
+        image(secondImg, 0, 0, width, height)
+    }
 }
 
 // Добавляем обработчик ресайза
@@ -65,3 +73,36 @@ window.addEventListener('resize', () => {
     maskLayer = createGraphics(width, height);
     redraw();
 });
+
+function checkCanvasFill() {
+
+    if (revealed) return
+
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+    const data = imageData.data
+
+    let painted = 0
+    let total = data.length / 4
+
+    for (let i = 3; i < data.length; i += 4) {
+
+        if (data[i] > 0) {
+            painted++
+        }
+
+    }
+
+    let percent = painted / total
+
+    if (percent > 0.95) {
+
+        console.log("canvas заполнен")
+
+        revealed = true
+
+    }
+
+}
