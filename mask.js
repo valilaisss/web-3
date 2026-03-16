@@ -1,8 +1,10 @@
-let img
-let maskImage
+let img;
+let secondImg;
+let revealed = false;
 
 function preload() {
     img = loadImage('assets/mask.png')
+    secondImg = loadImage('assets/secondScreen.png')
 }
 
 function setup() {
@@ -29,23 +31,23 @@ function draw() {
     // Y: 266/1080 = 0.2463 (24.63%)
     // Size: 566/1920 = 0.2948 (29.48%)
     maskLayer.circle(
-        width * 0.2057,      // X координата в процентах от ширины
-        height * 0.2463,     // Y координата в процентах от высоты
-        width * 0.2948       // диаметр в процентах от ширины
+        width * 0.3531,
+        height * 0.5083,
+        width * 0.2948
     );
     
     // Круг 2: 600x400 пикселей, размер 50px
     maskLayer.circle(
-        width * 0.3125,      // 600/1920 = 0.3125
-        height * 0.3704,     // 400/1080 = 0.3704
-        width * 0.0260       // 50/1920 = 0.0260
+        width * 0.6055,  // 60.55% от ширины
+        height * 0.2912, // 29.12% от высоты
+        width * 0.2026   // 20.26% от ширины
     );
     
     // Круг 3: 1000x1000 пикселей, размер 300px
     maskLayer.circle(
-        width * 0.5208,      // 1000/1920 = 0.5208
-        height * 0.9259,     // 1000/1080 = 0.9259
-        width * 0.1563       // 300/1920 = 0.1563
+        width * 0.9797,  // 97.97% от ширины
+        height * 0.8176, // 81.76% от высоты
+        width * 0.1073   // 10.73% от ширины
     );
     
     // Рисуем динамическую область (за мышкой)
@@ -58,6 +60,11 @@ function draw() {
     
     // Рисуем результат
     image(maskedImg, 0, 0, width, height);
+
+    checkCanvasFill()
+    if (revealed) {
+        image(secondImg, 0, 0, width, height)
+    }
 }
 
 // Добавляем обработчик ресайза
@@ -66,3 +73,36 @@ window.addEventListener('resize', () => {
     maskLayer = createGraphics(width, height);
     redraw();
 });
+
+function checkCanvasFill() {
+
+    if (revealed) return
+
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+    const data = imageData.data
+
+    let painted = 0
+    let total = data.length / 4
+
+    for (let i = 3; i < data.length; i += 4) {
+
+        if (data[i] > 0) {
+            painted++
+        }
+
+    }
+
+    let percent = painted / total
+
+    if (percent > 0.95) {
+
+        console.log("canvas заполнен")
+
+        revealed = true
+
+    }
+
+}
