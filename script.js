@@ -109,6 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   
   document.querySelector('.arrow-right').onclick = () => {
+    console.log('test')
+  }
+  document.querySelector('.arrow-right').onclick = () => {
       let newIndex = currentIndex + 1;
       if (newIndex >= totalSlides) newIndex = 0;
       showSlide(newIndex);

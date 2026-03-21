@@ -48,7 +48,8 @@ const maskCircles = [
       if (revealedPercent >= 0.8 && !revealed80Logged) {
         console.log("lyuboy");
         revealed80Logged = true;
-      }
+        // Короче тут надо добавить див в котором у тебя будет две половинки типа того (который орет). Он будет просто поверх canvas, но под маской. Внутри него сделай просто на pointerMove как с пальцем делали, а тексту сделай ширину через js тоже на pointermove, чтобы оно брало position по left у левой картинки вычитала ее из ширины страницы и делила на 2. Все это тупо поставить в width тегу с текстом
+    }
   
       const maskedImg = img.get();
       maskedImg.mask(maskLayer);
