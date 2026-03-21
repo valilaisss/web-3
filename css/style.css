@@ -12,7 +12,7 @@ body{
 }
 
 canvas {
-    z-index: 999;
+    z-index: 2;
     position: absolute;
     background-image: url('assets/defaultBG.png');
     width: 100%;
@@ -70,7 +70,7 @@ canvas {
     transform: translateY(-50%);
     width: 100%;
     height: 154%;    
-    z-index: 3;
+    z-index: 1;
 }
 .illustration-new-mask{
     position: absolute;
@@ -79,7 +79,7 @@ canvas {
     transform: translateY(-50%);
     width: 100%;
     height: 100%;    
-    z-index: 2; 
+    z-index: 3; 
 }
 .illustration-mask{
     position: absolute;
