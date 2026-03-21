@@ -1,54 +1,69 @@
-let img
-let maskImage
-
-function preload() {
-    img = loadImage('assets/mask.png')
-}
-
-function setup() {
-    windowWidth = window.innerWidth;
-    windowHeight = window.innerHeight;
-    
-    myCanvas = createCanvas(windowWidth, windowHeight)
-    myCanvas.parent("#canvas-parent")
-    maskLayer = createGraphics(windowWidth, windowHeight)
-}
-
-function draw() {
-    maskLayer.clear();
-    maskLayer.fill(255);
-    
-    maskLayer.circle(
-        width * 0.3531,
-        height * 0.5083,
-        width * 0.2948
-    );
-    
-    maskLayer.circle(
-        width * 0.6055,
-        height * 0.2912,
-        width * 0.2026
-    );
-    
-    maskLayer.circle(
-        width * 0.9797,
-        height * 0.8176,
-        width * 0.1073
-    );
-    
-    let circleWidth = width * 0.15;
-    maskLayer.circle(mouseX, mouseY, circleWidth);
-    let maskedImg = img.get(); 
-    maskedImg.mask(maskLayer);
-    image(maskedImg, 0, 0, width, height);
-}
-
-
-window.addEventListener('resize', () => {
-    resizeCanvas(window.innerWidth, window.innerHeight);
-    maskLayer = createGraphics(width, height);
-    redraw();
-});
+=const maskCircles = [
+    [0.3531, 0.5083, 0.2948],
+    [0.6055, 0.2912, 0.2026],
+    [0.9797, 0.8176, 0.1073],
+  ];
+  
+  new p5((p) => {
+    let img;
+    let maskLayer;
+    let revealed80Logged = false;
+  
+    function initMaskLayer() {
+      maskLayer = p.createGraphics(window.innerWidth, window.innerHeight);
+      maskLayer.clear();
+      maskLayer.fill(255);
+  
+      for (const [x, y, size] of maskCircles) {
+        maskLayer.circle(p.width * x, p.height * y, p.width * size);
+      }
+    }
+  
+    p.setup = async function () {
+      img = await p.loadImage("assets/mask.png");
+      p.createCanvas(window.innerWidth, window.innerHeight).parent("#canvas-parent");
+      initMaskLayer();
+    };
+  
+    p.draw = function () {
+      if (!img || !maskLayer) {
+        return;
+      }
+  
+      maskLayer.fill(255);
+      maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.15);
+      maskLayer.loadPixels();
+  
+      let revealedPixels = 0;
+      const totalPixels = maskLayer.pixels.length / 4;
+  
+      for (let i = 3; i < maskLayer.pixels.length; i += 4) {
+        if (maskLayer.pixels[i] > 0) {
+          revealedPixels++;
+        }
+      }
+  
+      const revealedPercent = revealedPixels / totalPixels;
+  
+      if (revealedPercent >= 0.8 && !revealed80Logged) {
+        console.log("lyuboy");
+        revealed80Logged = true;
+      }
+  
+      const maskedImg = img.get();
+      maskedImg.mask(maskLayer);
+      p.image(maskedImg, 0, 0, p.width, p.height);
+    };
+  
+    p.windowResized = function () {
+      p.resizeCanvas(window.innerWidth, window.innerHeight);
+      initMaskLayer();
+      revealed80Logged = false;
+    };
+  });
+  
+  
+  
 // let parentCanvas = document.querySelector('#canvas-parent')
 // let mask = document.createElement(img)
 // mask.src = "assets/images/Mask-1.png"
