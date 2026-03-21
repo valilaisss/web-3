@@ -60,7 +60,10 @@ const maskCircles = [
         if (revealedPercent >= 0.8 && !revealed80Logged) {
           console.log("lyuboy");
           revealed80Logged = true;
-          // Тут код для добавления дива
+          // Короче тут надо добавить див в котором у тебя будет две половинки типа того (который орет). 
+          // Он будет просто поверх canvas, но под маской. Внутри него сделай просто на pointerMove как с пальцем делали,
+          // а тексту сделай ширину через js тоже на pointermove, чтобы оно брало position по left у левой картинки
+          // вычитала ее из ширины страницы и делила на 2. Все это тупо поставить в width тегу с текстом
         }
         
         frameCounter = 0;
@@ -78,3 +81,8 @@ const maskCircles = [
       frameCounter = 0;
     };
   });
+
+// let parentCanvas = document.querySelector('#canvas-parent')
+// let mask = document.createElement(img)
+// mask.src = "assets/images/Mask-1.png"
+// parentCanvas.appendChild(mask)
