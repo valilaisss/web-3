@@ -54,6 +54,40 @@ canvas {
     height: auto;
     z-index: 1;
 }
+.illustration-new-bg{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 100%;    
+    z-index: 1;
+}
+.illustration-new-figure{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 154%;    
+    z-index: 3;
+}
+.illustration-new-mask{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 100%;    
+    z-index: 2; 
+}
+.illustration-mask{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: auto;
+}
 .illustration-bottom{
     position:absolute;
     transform: translateY(-100%);
@@ -172,7 +206,7 @@ canvas {
     left: 50%;
     top: 100%;
     transform: translate(-50%, -100%);
-    z-index: 2;
+    z-index: 4;
     background-image: url('../assets/subtrate.svg');
     background-position: center;
     background-size: 100% 100%; 
@@ -290,6 +324,7 @@ canvas {
     position: relative;
     width: 100%;
     height: 100%;
+    z-index: 4;
 }
 
 .calendar-container{
