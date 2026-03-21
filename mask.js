@@ -49,3 +49,7 @@ window.addEventListener('resize', () => {
     maskLayer = createGraphics(width, height);
     redraw();
 });
+let parentCanvas = document.querySelector('#canvas-parent')
+let mask = document.createElement(img)
+mask.src = "assets/images/Mask-1.png"
+parentCanvas.appendChild(mask)
