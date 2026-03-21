@@ -29,12 +29,21 @@ canvas {
     justify-content: center;
     position:relative;
     overflow:hidden;
-    position: relative;
+
 }
 .second-screen{
     position: relative;
     height: 100vh;
     width: 100%;
+}
+.third-screen{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../assets/images/bg-screen-3.png");
+    background-position: center;
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    position: relative;
 }
 .illustration{
     top: 50%;
@@ -45,6 +54,16 @@ canvas {
     height: auto;
     z-index: 1;
 }
+.illustration-bottom{
+    position:absolute;
+    transform: translateY(-100%);
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
 .gray-element-1{
     position: absolute;
     width: 71.3vw;
@@ -144,3 +163,223 @@ canvas {
     transform: scale(0.5);
     transition: opacity 0.5s, transform 0.5s;
   }
+
+  .substrate{
+    width: 74.95vw;
+    height: 45.94vw;
+    position: absolute;
+    position: relative;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -100%);
+    z-index: 2;
+    background-image: url('../assets/subtrate.svg');
+    background-position: center;
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    
+  }
+  .catastrophe{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 19.16%;
+    font-size: 2.08vw;
+    font-weight: 600;
+    color: #3F3F3F;
+    font-style: italic;
+  }
+  .catastrophe-img{
+    width: 14.06vw;
+    height: 8.8vw;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 27.32%;
+    mix-blend-mode: multiply;
+  }
+  .arrow-left{
+    width: 2.24vw;
+    height: 0.89vw;
+  }
+  .arrow-right{
+    width: 2.24vw;
+    height: 0.89vw;
+  }
+  .switch{
+    position: absolute;
+    top: 92.74%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10.73vw;
+    height: 1.98vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 2.08vw;
+    font-style: italic;
+    color: #3F3F3F;
+  }
+
+    
+
+.top-calendar-text{
+    position: relative;
+    width: 100%;
+    height: 37%;
+    font-size: 1.35vw;
+    font-weight: 600;
+    color: #3F3F3F;
+}
+.date{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+
+}
+.month{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 43.44%;
+}
+.mid-calendar-text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 32.50%;
+    font-size: 1.35vw;
+    font-weight: 600;
+    color: #737373;
+}
+.bottom-calendar-text{
+    position: relative;
+    font-size: 2.08vw;
+    width: 100%;
+    height: 43.12%;
+    color: #3F3F3F;
+    font-weight: 600;
+}
+.left-bottom-text{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    font-style: italic;
+}
+.mid-bottom-text{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 8.45%;
+    font-style: italic;
+}
+.right-bottom-text{
+    position: absolute;
+    left: 86.75%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.35vw;
+    font-weight: 600;
+    color: #3F3F3F;
+}
+.slide-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.calendar-container{
+    display:flex;
+    flex-direction: column;
+    position: absolute;
+    position: relative;
+    width: 68.39vw;
+    height: 6vw;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 8.31%;
+}
+.inf-button{
+    position: absolute;
+    width: 14.64vw;
+    height: 5.42vw;
+    top: 65.84%;
+    left: 40.24%;
+}
+.info-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.info-modal.show {
+    opacity: 1;
+}
+.info-modal-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    font-size: 1.3vw;
+    color: #A1A1A1;
+    font-weight: 500;
+    text-align: center;
+}
+.close-button {
+    width: 4.9vw;
+    height: 1.82vw;
+    cursor: pointer;
+}
+.close-button {
+    transform: scale(1.05);
+}
+
+
+.hidden-text {
+    display: none;
+}
+
+.info-overlay {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    width: 74.95vw;
+    height: 45.94vw;
+    background: white;
+    z-index: 1;    
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.info-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.info-text {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+
+    font-size: 1.5vw;
+    line-height: 1.5;
+    color: #3F3F3F;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
