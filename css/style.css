@@ -15,11 +15,9 @@ canvas {
     z-index: 2;
     position: absolute;
     background-image: url('assets/defaultBG.png');
-    top: 0; /* Добавьте */
-    left: 0; /* Добавьте */
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 .first-screen{
     display: flex;
@@ -82,6 +80,7 @@ canvas {
     width: 100%;
     height: 100%;    
     z-index: 3; 
+    object-fit: cover; 
 }
 .illustration-mask{
     position: absolute;
