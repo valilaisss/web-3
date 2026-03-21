@@ -9,9 +9,9 @@ const maskCircles = [
     let maskLayer;
     let revealed80Logged = false;
     let frameCounter = 0;
-
+  
     function initMaskLayer() {
-      maskLayer = p.createGraphics(p.width, p.height); // Изменено: используем p.width и p.height
+      maskLayer = p.createGraphics(window.innerWidth, window.innerHeight);
       maskLayer.clear();
       maskLayer.fill(255);
   
@@ -22,13 +22,7 @@ const maskCircles = [
   
     p.setup = async function () {
       img = await p.loadImage("assets/mask.png");
-      
-      // Получаем размеры родительского контейнера
-      const parent = document.querySelector("#canvas-parent");
-      const width = parent.clientWidth;
-      const height = parent.clientHeight;
-      
-      p.createCanvas(width, height).parent("#canvas-parent");
+      p.createCanvas(window.innerWidth, window.innerHeight).parent("#canvas-parent");
       initMaskLayer();
     };
   
@@ -40,43 +34,55 @@ const maskCircles = [
       maskLayer.fill(255);
       maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.15);
       
+      // Проверяем процент только раз в 30 кадров
       frameCounter++;
       if (frameCounter >= 30 && !revealed80Logged) {
         maskLayer.loadPixels();
-  
+        
         let revealedPixels = 0;
-        const totalPixels = maskLayer.pixels.length / 4;
-  
-        for (let i = 3; i < maskLayer.pixels.length; i += 16) {
+        let sampledPixels = 0;
+        const step = 8; // Проверяем каждый 8-й пиксель (увеличиваем точность)
+        
+        // Проверяем пиксели с шагом
+        for (let i = 3; i < maskLayer.pixels.length; i += step * 4) {
+          sampledPixels++;
           if (maskLayer.pixels[i] > 0) {
             revealedPixels++;
           }
         }
-  
-        const revealedPercent = (revealedPixels * 16) / totalPixels;
-  
+        
+        // Вычисляем процент на основе выборки
+        const totalPixels = maskLayer.pixels.length / 4;
+        const revealedPercent = (revealedPixels / sampledPixels);
+        
+        console.log(`Открыто: ${Math.round(revealedPercent * 100)}%`); // Добавляем лог для отладки
+        
         if (revealedPercent >= 0.8 && !revealed80Logged) {
           console.log("lyuboy");
           revealed80Logged = true;
-          // Короче тут надо добавить див в котором у тебя будет две половинки типа того (который орет). Он будет просто поверх canvas, но под маской. Внутри него сделай просто на pointerMove как с пальцем делали, а тексту сделай ширину через js тоже на pointermove, чтобы оно брало position по left у левой картинки вычитала ее из ширины страницы и делила на 2. Все это тупо поставить в width тегу с текстом
+          // Короче тут надо добавить див в котором у тебя будет две половинки типа того (который орет). 
+          // Он будет просто поверх canvas, но под маской. Внутри него сделай просто на pointerMove как с пальцем делали,
+          // а тексту сделай ширину через js тоже на pointermove, чтобы оно брало position по left у левой картинки
+          // вычитала ее из ширины страницы и делила на 2. Все это тупо поставить в width тегу с текстом
         }
         
         frameCounter = 0;
       }
-  
+      
       const maskedImg = img.get();
       maskedImg.mask(maskLayer);
       p.image(maskedImg, 0, 0, p.width, p.height);
     };
   
     p.windowResized = function () {
-      const parent = document.querySelector("#canvas-parent");
-      const width = parent.clientWidth;
-      const height = parent.clientHeight;
-      
-      p.resizeCanvas(width, height);
+      p.resizeCanvas(window.innerWidth, window.innerHeight);
       initMaskLayer();
       revealed80Logged = false;
       frameCounter = 0;
     };
   });
+
+// let parentCanvas = document.querySelector('#canvas-parent')
+// let mask = document.createElement(img)
+// mask.src = "assets/images/Mask-1.png"
+// parentCanvas.appendChild(mask)
