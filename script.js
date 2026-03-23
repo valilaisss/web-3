@@ -134,3 +134,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
   showSlide(0);
 });
+
+
+
+
+
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xeeeeee);
+
+// камера
+const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+);
+camera.position.set(0, 1, 5);
+
+// рендер
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// свет
+scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(5, 5, 5);
+scene.add(light);
+
+// управление
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+// загрузка GLB
+const loader = new THREE.GLTFLoader();
+
+loader.load('assets/Bed.glb', (gltf) => {
+    const model = gltf.scene;
+
+    model.scale.set(1, 1, 1);
+    scene.add(model);
+
+    // если есть анимации
+    if (gltf.animations.length) {
+        const mixer = new THREE.AnimationMixer(model);
+
+        gltf.animations.forEach(clip => {
+            mixer.clipAction(clip).play();
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            mixer.update(0.016);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    }
+});
+
+// обычный рендер
+function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+}
+animate();
