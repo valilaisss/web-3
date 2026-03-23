@@ -1,45 +1,7 @@
-const sources = [
-  "assets/images/draw-1.svg",
-  "assets/images/draw-2.svg",
-  "assets/images/draw-3.svg",
-  "assets/images/draw-4.svg",
-  "assets/images/draw-5.svg"
-];
-const drawArea = document.getElementById("drawArea");
-let drawing = false;
-let lastDrawTime = 0;
 
-drawArea.addEventListener("pointermove", (e) => {
 
-  const now = Date.now();
-  if (now - lastDrawTime < 50) return; // ограничение частоты
-  lastDrawTime = now;
 
-  const rect = drawArea.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
 
-  const img = document.createElement("img");
-  const random = Math.floor(Math.random() * sources.length);
-
-  img.src = sources[random];
-  img.className = "stamp";
-  img.style.left = (x - 20) + "px";
-  img.style.top = (y - 20) + "px";
-
-  drawArea.appendChild(img);
-
-  requestAnimationFrame(() => {
-    img.style.opacity = 1;
-    img.style.transform = "scale(1)";
-  });
-
-  setTimeout(() => {
-    img.style.opacity = 0;
-    img.style.transform = "scale(0.5)";
-    setTimeout(() => img.remove(), 500);
-  }, 2000);
-});
 
 document.getElementById("nap-word").addEventListener("click", () => {
   if(document.querySelector(".active-sleep-box")) return;
@@ -68,6 +30,10 @@ document.getElementById("nap-word").addEventListener("click", () => {
     setTimeout(() => box.remove(), 500);
   });
 });
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -114,9 +80,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     pageNumber.textContent = `(${String(index).padStart(2, '0')})`;
-
+    const infoTextPositions = ['19.16%;', '64.94%', '67.64%', '65%', '65%'];
+    textBox.style.top = infoTextPositions[index];
     currentIndex = index;
   }
+
+
+  
 
   document.querySelector('.arrow-left').onclick = () => {
     let newIndex = currentIndex - 1;

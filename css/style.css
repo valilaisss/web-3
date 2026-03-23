@@ -208,7 +208,7 @@ canvas {
     left: 50%;
     top: 100%;
     transform: translate(-50%, -100%);
-    z-index: 4;
+    z-index: 10;
     background-image: url('../assets/subtrate.svg');
     background-position: center;
     background-size: 100% 100%; 
@@ -409,7 +409,7 @@ canvas {
     width: 74.95vw;
     height: 45.94vw;
     background: white;
-    z-index: 2;    
+    z-index: 9;    
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -423,7 +423,6 @@ canvas {
 
 .info-text {
     position: absolute;
-    top: 64.94%;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -431,6 +430,7 @@ canvas {
     color: #A1A1A1;
     white-space: nowrap;
     font-weight: 500;
+    line-height: 130%;
 }
 
 .third-screen {
