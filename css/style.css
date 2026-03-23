@@ -79,7 +79,8 @@ canvas {
     transform: translateY(-50%);
     width: 100%;
     height: 100%;    
-    z-index: 3; 
+    z-index: 3;
+    pointer-events: none;
 }
 .illustration-mask{
     position: absolute;
@@ -87,6 +88,7 @@ canvas {
     transform: translateY(-50%);
     width: 100%;
     height: auto;
+    pointer-events: none;
 }
 .illustration-bottom{
     position:absolute;
@@ -147,24 +149,24 @@ canvas {
     z-index: 9;
     cursor:pointer;
     font-size: 3.28vw;
-    height: 44px;
+    height: 2.29vw;
     font-weight: 600;
     color: #3F3F3F;
     background-color: #ffffff;
-    padding-bottom: 4px;
+    padding-bottom: 0.21vw;
     display: flex;
     align-items: flex-end;
 }
 
 .stamp{
     position:absolute;
-    width:226px;
-    height: 146px;
+    width: 11.77vw;
+    height: 7.6vw;
     pointer-events:none;
     opacity:0; 
     transform: scale(0.5);
     transition: opacity 0.5s, transform 0.5s;
-    z-index:2;
+    z-index: 2;
   }
 
 
@@ -175,20 +177,20 @@ canvas {
     pointer-events: auto;
     cursor: pointer;
     user-select: none;
-    font-size: 64px;
+    font-size:  3.33vw;
     text-box-edge: cap alphabetic;
     text-box-trim: trim-both;
   }
 
   .active-sleep-box {
     position: absolute;
-    width: 795px;
+    width:  42vw;
     height: fit-content;
     background: white;
-    font-size: 30px;
+    font-size: 1.56vw;
     color: #3F3F3F;
     font-weight: 600;
-    line-height: 39px;
+    line-height: 2.03vw;
     letter-spacing: -3%;
     user-select: none;
     z-index: 10;
@@ -211,6 +213,7 @@ canvas {
     background-position: center;
     background-size: 100% 100%; 
     background-repeat: no-repeat;
+    pointer-events: none;
     
   }
   .catastrophe{
@@ -235,10 +238,14 @@ canvas {
   .arrow-left{
     width: 2.24vw;
     height: 0.89vw;
+    pointer-events: auto;
+    cursor: pointer;
   }
   .arrow-right{
     width: 2.24vw;
     height: 0.89vw;
+    pointer-events: auto;
+    cursor: pointer;
   }
   .switch{
     position: absolute;
@@ -343,6 +350,13 @@ canvas {
     height: 5.42vw;
     top: 65.84%;
     left: 40.24%;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out;
+}
+
+.inf-button:hover {
+    transform: scale(1.12);
 }
 .info-modal {
     position: absolute;
@@ -370,15 +384,19 @@ canvas {
     text-align: center;
 }
 .close-button {
+    position: absolute;
+    top: 58.8%;
+    left: 50%;
     width: 4.9vw;
     height: 1.82vw;
     cursor: pointer;
-}
-.close-button {
-    transform: scale(1.05);
+    transform: translateX(-50%);
+    transition: transform 0.5s ease-in-out;
 }
 
-
+.close-button:hover {
+    transform: translateX(-50%) scale(1.10);
+}
 .hidden-text {
     display: none;
 }
@@ -391,7 +409,7 @@ canvas {
     width: 74.95vw;
     height: 45.94vw;
     background: white;
-    z-index: 1;    
+    z-index: 2;    
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -405,19 +423,15 @@ canvas {
 
 .info-text {
     position: absolute;
-    top: 15%;
-    left: 10%;
-    width: 80%;
-
-    font-size: 1.5vw;
-    line-height: 1.5;
-    color: #3F3F3F;
-
-    display: flex;
-    flex-direction: column;
-    gap: 1vw;
+    top: 64.94%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 1.25vw;
+    color: #A1A1A1;
+    white-space: nowrap;
+    font-weight: 500;
 }
-
 
 .third-screen {
     width: 100%;
@@ -438,4 +452,5 @@ canvas {
     width: 100%;
     height: 100%;    
     z-index: 3;
+    pointer-events: none;
 }

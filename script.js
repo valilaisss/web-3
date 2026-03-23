@@ -8,24 +8,25 @@ const sources = [
 const drawArea = document.getElementById("drawArea");
 let drawing = false;
 let lastDrawTime = 0;
-drawArea.addEventListener("pointerdown", () => drawing = true);
-document.addEventListener("pointerup", () => drawing = false);
 
-drawArea.addEventListener("pointermove", (e)=>{
-  if(!drawing) return;
-  
+drawArea.addEventListener("pointermove", (e) => {
+
   const now = Date.now();
-  if(now - lastDrawTime < 50) return;
+  if (now - lastDrawTime < 50) return; // ограничение частоты
   lastDrawTime = now;
+
   const rect = drawArea.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
+
   const img = document.createElement("img");
   const random = Math.floor(Math.random() * sources.length);
+
   img.src = sources[random];
   img.className = "stamp";
   img.style.left = (x - 20) + "px";
   img.style.top = (y - 20) + "px";
+
   drawArea.appendChild(img);
 
   requestAnimationFrame(() => {
@@ -39,7 +40,6 @@ drawArea.addEventListener("pointermove", (e)=>{
     setTimeout(() => img.remove(), 500);
   }, 2000);
 });
-
 
 document.getElementById("nap-word").addEventListener("click", () => {
   if(document.querySelector(".active-sleep-box")) return;
@@ -69,78 +69,98 @@ document.getElementById("nap-word").addEventListener("click", () => {
   });
 });
 
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
+
   let currentIndex = 0;
   const totalSlides = 5;
-  
+
   const backgrounds = [
-      'url("assets/images/bg-screen-3.png")',
-      'url("assets/images/bg-slide-1.svg")',
-      'url("assets/images/bg-slide-2.svg")',
-      'url("assets/images/bg-slide-3.png")',
-      'url("assets/images/bg-slide-4.png")'
+    'url("assets/images/bg-screen-3.png")',
+    'url("assets/images/bg-slide-1.svg")',
+    'url("assets/images/bg-slide-2.svg")',
+    'url("assets/images/bg-slide-3.png")',
+    'url("assets/images/bg-slide-4.png")'
   ];
-  
+
   const thirdScreen = document.querySelector('.third-screen');
   const slideContents = document.querySelectorAll('.slide-content');
   const pageNumber = document.querySelector('.page-number');
-  
+
+  const overlay = document.querySelector('.info-overlay');
+  const textBox = document.querySelector('.info-text');
+  const closeBtn = document.querySelector('.close-button');
+
+  // =====================
+  // СЛАЙДЫ
+  // =====================
+  let activeButton = null;
+
   function showSlide(index) {
-      thirdScreen.style.backgroundImage = backgrounds[index];
-      
-      slideContents.forEach((content, i) => {
-          content.style.display = i === index ? 'block' : 'none';
-      });
-      
-      pageNumber.textContent = `(${String(index + 1).padStart(2, '0')})`;
-      
-      currentIndex = index;
+
+    // Скрываем overlay при переключении и возвращаем кнопку
+    if (overlay.classList.contains('active')) {
+      overlay.classList.remove('active');
+    }
+    
+    if (activeButton) {
+      activeButton.style.display = 'block';
+      activeButton = null;
+    }
+
+    thirdScreen.style.backgroundImage = backgrounds[index];
+
+    slideContents.forEach((content, i) => {
+      content.style.display = i === index ? 'block' : 'none';
+    });
+
+    pageNumber.textContent = `(${String(index).padStart(2, '0')})`;
+
+    currentIndex = index;
   }
-  
+
   document.querySelector('.arrow-left').onclick = () => {
-      let newIndex = currentIndex - 1;
-      if (newIndex < 0) newIndex = totalSlides - 1;
-      showSlide(newIndex);
+    let newIndex = currentIndex - 1;
+    if (newIndex < 0) newIndex = totalSlides - 1;
+    showSlide(newIndex);
   };
-  
+
   document.querySelector('.arrow-right').onclick = () => {
-    console.log('test')
-  }
-  document.querySelector('.arrow-right').onclick = () => {
-      let newIndex = currentIndex + 1;
-      if (newIndex >= totalSlides) newIndex = 0;
-      showSlide(newIndex);
+    let newIndex = currentIndex + 1;
+    if (newIndex >= totalSlides) newIndex = 0;
+    showSlide(newIndex);
   };
-  
-  showSlide(0);
-});
 
-
-
-
-
-const overlay = document.querySelector('.info-overlay');
-const textBox = document.querySelector('.info-text');
-
-
-document.querySelectorAll('.inf-button').forEach(btn => {
-  btn.addEventListener('click', (e) => {
+  // =====================
+  // OVERLAY
+  // =====================
+  document.querySelectorAll('.inf-button').forEach(btn => {
+    btn.addEventListener('click', (e) => {
       e.stopPropagation();
 
       const id = btn.dataset.id;
-      const text = document.getElementById(id).innerHTML;
+      if (!id) return;
 
-      textBox.innerHTML = text;
+      const hidden = document.getElementById(id);
+      if (!hidden) return;
 
+      textBox.innerHTML = hidden.innerHTML;
+
+      activeButton = btn;
+      activeButton.style.display = 'none';
       overlay.classList.add('active');
+    });
   });
-});
 
-overlay.addEventListener('click', () => {
-  overlay.classList.remove('active');
+  // Закрытие по кнопке close-button
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    overlay.classList.remove('active');
+    
+    if (activeButton) {
+      activeButton.style.display = 'block';
+      activeButton = null;
+    }
+  });
+
+  showSlide(0);
 });
