@@ -63,15 +63,15 @@ const maskCircles = [
             overlay.className = 'new-images-overlay';
             
             const bgImg = document.createElement('img');
-            bgImg.src = "assets/images/bg-human.png";
+            bgImg.src = "assets/images/bg-human.svg";
             bgImg.className = 'overlay-bg';
             
             const leftImg = document.createElement('img');
-            leftImg.src = "assets/images/left-part-human.png";
+            leftImg.src = "assets/images/left-part-human.svg";
             leftImg.className = 'overlay-left';
             
             const rightImg = document.createElement('img');
-            rightImg.src = "assets/images/right-part-human.png";
+            rightImg.src = "assets/images/right-part-human.svg";
             rightImg.className = 'overlay-right';
             
             overlay.appendChild(bgImg);
