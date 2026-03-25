@@ -6,9 +6,11 @@ const maskCircles = [
   
   new p5((p) => {
     let img;
+    let secondImg; // Новая картинка
     let maskLayer;
     let revealed80Logged = false;
     let frameCounter = 0;
+    let backgroundChanged = false; // Флаг для отслеживания смены фона
   
     function initMaskLayer() {
       maskLayer = p.createGraphics(window.innerWidth, window.innerHeight);
@@ -21,7 +23,9 @@ const maskCircles = [
     }
   
     p.setup = async function () {
+      // Загружаем обе картинки
       img = await p.loadImage("assets/mask.png");
+      secondImg = await p.loadImage("assets/left-part-human.png"); // Новая картинка
       p.createCanvas(window.innerWidth, window.innerHeight).parent("#canvas-parent");
       initMaskLayer();
     };
@@ -41,9 +45,8 @@ const maskCircles = [
         
         let revealedPixels = 0;
         let sampledPixels = 0;
-        const step = 8; // Проверяем каждый 8-й пиксель (увеличиваем точность)
+        const step = 8;
         
-        // Проверяем пиксели с шагом
         for (let i = 3; i < maskLayer.pixels.length; i += step * 4) {
           sampledPixels++;
           if (maskLayer.pixels[i] > 0) {
@@ -51,38 +54,40 @@ const maskCircles = [
           }
         }
         
-        // Вычисляем процент на основе выборки
-        const totalPixels = maskLayer.pixels.length / 4;
         const revealedPercent = (revealedPixels / sampledPixels);
         
-        console.log(`Открыто: ${Math.round(revealedPercent * 100)}%`); // Добавляем лог для отладки
+        console.log(`Открыто: ${Math.round(revealedPercent * 100)}%`);
         
         if (revealedPercent >= 0.8 && !revealed80Logged) {
-          console.log("lyuboy");
+          console.log("Достигнуто 80%! Меняем фон...");
           revealed80Logged = true;
-          // Короче тут надо добавить див в котором у тебя будет две половинки типа того (который орет). 
-          // Он будет просто поверх canvas, но под маской. Внутри него сделай просто на pointerMove как с пальцем делали,
-          // а тексту сделай ширину через js тоже на pointermove, чтобы оно брало position по left у левой картинки
-          // вычитала ее из ширины страницы и делила на 2. Все это тупо поставить в width тегу с текстом
+          backgroundChanged = true;
+          
+          // Создаем событие, которое можно перехватить в другом месте
+          const event = new CustomEvent('maskComplete', { 
+            detail: { message: 'Маска заполнена' } 
+          });
+          window.dispatchEvent(event);
         }
         
         frameCounter = 0;
       }
       
-      const maskedImg = img.get();
-      maskedImg.mask(maskLayer);
-      p.image(maskedImg, 0, 0, p.width, p.height);
+      // Выбираем какую картинку показывать
+      let currentImg = backgroundChanged ? secondImg : img;
+      
+      if (currentImg) {
+        const maskedImg = currentImg.get();
+        maskedImg.mask(maskLayer);
+        p.image(maskedImg, 0, 0, p.width, p.height);
+      }
     };
   
     p.windowResized = function () {
       p.resizeCanvas(window.innerWidth, window.innerHeight);
       initMaskLayer();
       revealed80Logged = false;
+      backgroundChanged = false; // Сбрасываем флаг при изменении размера
       frameCounter = 0;
     };
   });
-
-// let parentCanvas = document.querySelector('#canvas-parent')
-// let mask = document.createElement(img)
-// mask.src = "assets/images/Mask-1.png"
-// parentCanvas.appendChild(mask)
