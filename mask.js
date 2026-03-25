@@ -6,13 +6,14 @@ const maskCircles = [
   
   new p5((p) => {
     let img;
-    let newImg1;  // Первая новая картинка
-    let newImg2;  // Вторая новая картинка
-    let newImg3;  // Третья новая картинка
+    let newImg1;  // Левая часть
+    let newImg2;  // Правая часть
+    let newImg3;  // Фон
     let maskLayer;
     let revealed80Logged = false;
     let frameCounter = 0;
     let backgroundChanged = false;
+    let maskFrozen = false; // Замораживаем маску после смены
   
     function initMaskLayer() {
       maskLayer = p.createGraphics(window.innerWidth, window.innerHeight);
@@ -40,11 +41,14 @@ const maskCircles = [
         return;
       }
   
-      maskLayer.fill(255);
-      maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.15);
+      // Рисуем круг на маске ТОЛЬКО до смены картинок
+      if (!backgroundChanged) {
+        maskLayer.fill(255);
+        maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.15);
+      }
       
       frameCounter++;
-      if (frameCounter >= 30 && !revealed80Logged) {
+      if (frameCounter >= 30 && !revealed80Logged && !backgroundChanged) {
         maskLayer.loadPixels();
         
         let revealedPixels = 0;
@@ -78,25 +82,27 @@ const maskCircles = [
       
       // Выбираем какие картинки показывать
       if (!backgroundChanged) {
-        // До заполнения: показываем оригинальную картинку
+        // До заполнения: показываем оригинальную картинку с активной маской
         const maskedImg = img.get();
         maskedImg.mask(maskLayer);
         p.image(maskedImg, 0, 0, p.width, p.height);
       } else {
-        // После заполнения: показываем 3 новые картинки
-        // Все три картинки накладываются друг на друга
-        const maskedImg3 = newImg3.get();
-        maskedImg3.mask(maskLayer);
-        p.image(maskedImg3, 0, 0, p.width, p.height);
-
+        // После заполнения: показываем новые картинки БЕЗ дальнейшего применения маски
+        // Используем сохраненную маску, но больше не обновляем ее
+        
+        // 1. Сначала фон (самый нижний слой)
+        p.image(newImg3, 0, 0, p.width, p.height);
+        
+        // 2. Левая часть с финальной маской
+        const finalMask = maskLayer.get();
         const maskedImg1 = newImg1.get();
-        maskedImg1.mask(maskLayer);
+        maskedImg1.mask(finalMask);
         p.image(maskedImg1, p.width * 0.1484, 0, p.width * 0.35, p.height * 0.99);
         
+        // 3. Правая часть с финальной маской
         const maskedImg2 = newImg2.get();
-        maskedImg2.mask(maskLayer);
+        maskedImg2.mask(finalMask);
         p.image(maskedImg2, p.width * 0.5, 0, p.width * 0.35, p.height * 0.99);
-        
       }
     };
   
@@ -105,6 +111,7 @@ const maskCircles = [
       initMaskLayer();
       revealed80Logged = false;
       backgroundChanged = false;
+      maskFrozen = false;
       frameCounter = 0;
     };
   });
