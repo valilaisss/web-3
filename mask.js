@@ -6,14 +6,13 @@ const maskCircles = [
   
   new p5((p) => {
     let img;
-    let newImg1;  // Левая часть
-    let newImg2;  // Правая часть
-    let newImg3;  // Фон
+    let newImg1;  // Первая новая картинка
+    let newImg2;  // Вторая новая картинка
+    let newImg3;  // Третья новая картинка
     let maskLayer;
     let revealed80Logged = false;
     let frameCounter = 0;
     let backgroundChanged = false;
-    let maskFrozen = false; // Замораживаем маску после смены
   
     function initMaskLayer() {
       maskLayer = p.createGraphics(window.innerWidth, window.innerHeight);
@@ -27,10 +26,10 @@ const maskCircles = [
   
     p.setup = async function () {
       // Загружаем все картинки
-      img = await p.loadImage("assets/images/draw-picture.svg");
-      newImg1 = await p.loadImage("assets/images/left-part-human.svg");
-      newImg2 = await p.loadImage("assets/images/right-part-human.svg");
-      newImg3 = await p.loadImage("assets/images/bg-human.svg");
+      img = await p.loadImage("assets/images/draw-picture.png");
+      newImg1 = await p.loadImage("assets/images/left-part-human.png");
+      newImg2 = await p.loadImage("assets/images/right-part-human.png");
+      newImg3 = await p.loadImage("assets/images/bg-human.png");
       
       p.createCanvas(window.innerWidth, window.innerHeight).parent("#canvas-parent");
       initMaskLayer();
@@ -41,14 +40,11 @@ const maskCircles = [
         return;
       }
   
-      // Рисуем круг на маске ТОЛЬКО до смены картинок
-      if (!backgroundChanged) {
-        maskLayer.fill(255);
-        maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.15);
-      }
+      maskLayer.fill(255);
+      maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.15);
       
       frameCounter++;
-      if (frameCounter >= 30 && !revealed80Logged && !backgroundChanged) {
+      if (frameCounter >= 30 && !revealed80Logged) {
         maskLayer.loadPixels();
         
         let revealedPixels = 0;
@@ -82,27 +78,25 @@ const maskCircles = [
       
       // Выбираем какие картинки показывать
       if (!backgroundChanged) {
-        // До заполнения: показываем оригинальную картинку с активной маской
+        // До заполнения: показываем оригинальную картинку
         const maskedImg = img.get();
         maskedImg.mask(maskLayer);
         p.image(maskedImg, 0, 0, p.width, p.height);
       } else {
-        // После заполнения: показываем новые картинки БЕЗ дальнейшего применения маски
-        // Используем сохраненную маску, но больше не обновляем ее
-        
-        // 1. Сначала фон (самый нижний слой)
-        p.image(newImg3, 0, 0, p.width, p.height);
-        
-        // 2. Левая часть с финальной маской
-        const finalMask = maskLayer.get();
+        // После заполнения: показываем 3 новые картинки
+        // Все три картинки накладываются друг на друга
+        const maskedImg3 = newImg3.get();
+        maskedImg3.mask(maskLayer);
+        p.image(maskedImg3, 0, 0, p.width, p.height);
+
         const maskedImg1 = newImg1.get();
-        maskedImg1.mask(finalMask);
+        maskedImg1.mask(maskLayer);
         p.image(maskedImg1, p.width * 0.1484, 0, p.width * 0.35, p.height * 0.99);
         
-        // 3. Правая часть с финальной маской
         const maskedImg2 = newImg2.get();
-        maskedImg2.mask(finalMask);
+        maskedImg2.mask(maskLayer);
         p.image(maskedImg2, p.width * 0.5, 0, p.width * 0.35, p.height * 0.99);
+        
       }
     };
   
@@ -111,7 +105,6 @@ const maskCircles = [
       initMaskLayer();
       revealed80Logged = false;
       backgroundChanged = false;
-      maskFrozen = false;
       frameCounter = 0;
     };
   });
