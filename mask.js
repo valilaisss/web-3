@@ -10,7 +10,6 @@ const maskCircles = [
     let revealed80Logged = false;
     let frameCounter = 0;
     
-    // Переменные для предзагруженных картинок
     let preloadedBg = null;
     let preloadedLeft = null;
     let preloadedRight = null;
@@ -25,7 +24,6 @@ const maskCircles = [
       }
     }
     
-    // Функция предзагрузки картинок
     function preloadImages() {
       preloadedBg = new Image();
       preloadedBg.src = "assets/images/bg-human.svg";
@@ -39,10 +37,7 @@ const maskCircles = [
   
     p.setup = async function () {
       img = await p.loadImage("assets/images/draw-picture.png");
-      
-      // Предзагружаем новые картинки
       preloadImages();
-      
       p.createCanvas(window.innerWidth, window.innerHeight).parent("#canvas-parent");
       initMaskLayer();
     };
@@ -52,8 +47,11 @@ const maskCircles = [
         return;
       }
   
-      maskLayer.fill(255);
-      maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.35);
+      // Рисуем только если мышь внутри canvas и нажата кнопка
+      if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height && p.mouseIsPressed) {
+        maskLayer.fill(255);
+        maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.35);
+      }
       
       frameCounter++;
       if (frameCounter >= 30 && !revealed80Logged) {
@@ -78,7 +76,6 @@ const maskCircles = [
           console.log("lyuboy");
           revealed80Logged = true;
           
-          // Создаем контейнер с новыми картинками
           if (!document.querySelector('.new-images-overlay')) {
             const overlay = document.createElement('div');
             overlay.className = 'new-images-overlay';
