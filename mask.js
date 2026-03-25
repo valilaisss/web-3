@@ -47,8 +47,8 @@ const maskCircles = [
         return;
       }
   
-      // Рисуем только если мышь внутри canvas и нажата кнопка
-      if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height && p.mouseIsPressed) {
+      // Рисуем только если мышь внутри canvas
+      if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
         maskLayer.fill(255);
         maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.35);
       }
