@@ -53,7 +53,7 @@ const maskCircles = [
         
         console.log(`Открыто: ${Math.round(revealedPercent * 100)}%`);
         
-        if (revealedPercent >= 0.8 && !revealed80Logged) {
+        if (revealedPercent >= 0.99 && !revealed80Logged) {
           console.log("lyuboy");
           revealed80Logged = true;
           
