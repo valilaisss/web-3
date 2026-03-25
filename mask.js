@@ -6,11 +6,13 @@ const maskCircles = [
   
   new p5((p) => {
     let img;
-    let secondImg; // Новая картинка
+    let newImg1;  // Первая новая картинка
+    let newImg2;  // Вторая новая картинка
+    let newImg3;  // Третья новая картинка
     let maskLayer;
     let revealed80Logged = false;
     let frameCounter = 0;
-    let backgroundChanged = false; // Флаг для отслеживания смены фона
+    let backgroundChanged = false;
   
     function initMaskLayer() {
       maskLayer = p.createGraphics(window.innerWidth, window.innerHeight);
@@ -23,9 +25,12 @@ const maskCircles = [
     }
   
     p.setup = async function () {
-      // Загружаем обе картинки
+      // Загружаем все картинки
       img = await p.loadImage("assets/mask.png");
-      secondImg = await p.loadImage("assets/images/left-part-human.png"); // Новая картинка
+      newImg1 = await p.loadImage("assets/images/left-part-human.svg");
+      newImg2 = await p.loadImage("assets/images/right-part-human.svg");
+      newImg3 = await p.loadImage("assets/images/bg-human.svg");
+      
       p.createCanvas(window.innerWidth, window.innerHeight).parent("#canvas-parent");
       initMaskLayer();
     };
@@ -38,7 +43,6 @@ const maskCircles = [
       maskLayer.fill(255);
       maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.15);
       
-      // Проверяем процент только раз в 30 кадров
       frameCounter++;
       if (frameCounter >= 30 && !revealed80Logged) {
         maskLayer.loadPixels();
@@ -59,11 +63,10 @@ const maskCircles = [
         console.log(`Открыто: ${Math.round(revealedPercent * 100)}%`);
         
         if (revealedPercent >= 0.8 && !revealed80Logged) {
-          console.log("Достигнуто 80%! Меняем фон...");
+          console.log("Достигнуто 80%! Меняем картинки...");
           revealed80Logged = true;
           backgroundChanged = true;
           
-          // Создаем событие, которое можно перехватить в другом месте
           const event = new CustomEvent('maskComplete', { 
             detail: { message: 'Маска заполнена' } 
           });
@@ -73,13 +76,27 @@ const maskCircles = [
         frameCounter = 0;
       }
       
-      // Выбираем какую картинку показывать
-      let currentImg = backgroundChanged ? secondImg : img;
-      
-      if (currentImg) {
-        const maskedImg = currentImg.get();
+      // Выбираем какие картинки показывать
+      if (!backgroundChanged) {
+        // До заполнения: показываем оригинальную картинку
+        const maskedImg = img.get();
         maskedImg.mask(maskLayer);
         p.image(maskedImg, 0, 0, p.width, p.height);
+      } else {
+        // После заполнения: показываем 3 новые картинки
+        // Все три картинки накладываются друг на друга
+        
+        const maskedImg1 = newImg1.get();
+        maskedImg1.mask(maskLayer);
+        p.image(maskedImg1, p.width * 0.1484, 0, p.width * 0.35, p.height * 0.99);
+        
+        const maskedImg2 = newImg2.get();
+        maskedImg2.mask(maskLayer);
+        p.image(maskedImg2, p.width * 0.5, 0, p.width * 0.35, p.height * 0.99);
+        
+        const maskedImg3 = newImg3.get();
+        maskedImg3.mask(maskLayer);
+        p.image(maskedImg3, 0, 0, p.width, p.height);
       }
     };
   
@@ -87,7 +104,7 @@ const maskCircles = [
       p.resizeCanvas(window.innerWidth, window.innerHeight);
       initMaskLayer();
       revealed80Logged = false;
-      backgroundChanged = false; // Сбрасываем флаг при изменении размера
+      backgroundChanged = false;
       frameCounter = 0;
     };
   });
