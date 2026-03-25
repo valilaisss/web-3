@@ -26,7 +26,7 @@ const maskCircles = [
   
     p.setup = async function () {
       // Загружаем все картинки
-      img = await p.loadImage("assets/mask.png");
+      img = await p.loadImage("assets/images/draw-picture.svg");
       newImg1 = await p.loadImage("assets/images/left-part-human.svg");
       newImg2 = await p.loadImage("assets/images/right-part-human.svg");
       newImg3 = await p.loadImage("assets/images/bg-human.svg");
@@ -85,7 +85,10 @@ const maskCircles = [
       } else {
         // После заполнения: показываем 3 новые картинки
         // Все три картинки накладываются друг на друга
-        
+        const maskedImg3 = newImg3.get();
+        maskedImg3.mask(maskLayer);
+        p.image(maskedImg3, 0, 0, p.width, p.height);
+
         const maskedImg1 = newImg1.get();
         maskedImg1.mask(maskLayer);
         p.image(maskedImg1, p.width * 0.1484, 0, p.width * 0.35, p.height * 0.99);
@@ -94,9 +97,6 @@ const maskCircles = [
         maskedImg2.mask(maskLayer);
         p.image(maskedImg2, p.width * 0.5, 0, p.width * 0.35, p.height * 0.99);
         
-        const maskedImg3 = newImg3.get();
-        maskedImg3.mask(maskLayer);
-        p.image(maskedImg3, 0, 0, p.width, p.height);
       }
     };
   
