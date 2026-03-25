@@ -25,7 +25,7 @@ const maskCircles = [
     p.setup = async function () {
       // Загружаем обе картинки
       img = await p.loadImage("assets/mask.png");
-      secondImg = await p.loadImage("assets/left-part-human.png"); // Новая картинка
+      secondImg = await p.loadImage("assets/images/left-part-human.png"); // Новая картинка
       p.createCanvas(window.innerWidth, window.innerHeight).parent("#canvas-parent");
       initMaskLayer();
     };
