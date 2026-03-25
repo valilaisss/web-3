@@ -9,6 +9,11 @@ const maskCircles = [
     let maskLayer;
     let revealed80Logged = false;
     let frameCounter = 0;
+    
+    // Переменные для предзагруженных картинок
+    let preloadedBg = null;
+    let preloadedLeft = null;
+    let preloadedRight = null;
   
     function initMaskLayer() {
       maskLayer = p.createGraphics(window.innerWidth, window.innerHeight);
@@ -19,9 +24,25 @@ const maskCircles = [
         maskLayer.circle(p.width * x, p.height * y, p.width * size);
       }
     }
+    
+    // Функция предзагрузки картинок
+    function preloadImages() {
+      preloadedBg = new Image();
+      preloadedBg.src = "assets/images/bg-human.svg";
+      
+      preloadedLeft = new Image();
+      preloadedLeft.src = "assets/images/left-part-human.svg";
+      
+      preloadedRight = new Image();
+      preloadedRight.src = "assets/images/right-part-human.svg";
+    }
   
     p.setup = async function () {
       img = await p.loadImage("assets/images/draw-picture.png");
+      
+      // Предзагружаем новые картинки
+      preloadImages();
+      
       p.createCanvas(window.innerWidth, window.innerHeight).parent("#canvas-parent");
       initMaskLayer();
     };
