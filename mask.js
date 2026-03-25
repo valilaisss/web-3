@@ -32,7 +32,7 @@ const maskCircles = [
       }
   
       maskLayer.fill(255);
-      maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.15);
+      maskLayer.circle(p.mouseX, p.mouseY, p.width * 0.35);
       
       frameCounter++;
       if (frameCounter >= 30 && !revealed80Logged) {
