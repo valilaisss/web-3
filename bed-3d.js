@@ -33,6 +33,7 @@
         loader.load('assets/Bed.glb',
             (gltf) => {
                 console.log('Модель загружена!');
+                gltf.scene.rotation.y = Math.PI;
                 scene.add(gltf.scene);
                 
                 // Центрируем камеру на модель
