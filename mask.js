@@ -6,13 +6,9 @@ const maskCircles = [
   
   new p5((p) => {
     let img;
-    let newImg1;  // Первая новая картинка
-    let newImg2;  // Вторая новая картинка
-    let newImg3;  // Третья новая картинка
     let maskLayer;
     let revealed80Logged = false;
     let frameCounter = 0;
-    let backgroundChanged = false;
   
     function initMaskLayer() {
       maskLayer = p.createGraphics(window.innerWidth, window.innerHeight);
@@ -25,12 +21,7 @@ const maskCircles = [
     }
   
     p.setup = async function () {
-      // Загружаем все картинки
       img = await p.loadImage("assets/images/draw-picture.png");
-      newImg1 = await p.loadImage("assets/images/left-part-human.png");
-      newImg2 = await p.loadImage("assets/images/right-part-human.png");
-      newImg3 = await p.loadImage("assets/images/bg-human.png");
-      
       p.createCanvas(window.innerWidth, window.innerHeight).parent("#canvas-parent");
       initMaskLayer();
     };
@@ -63,48 +54,51 @@ const maskCircles = [
         console.log(`Открыто: ${Math.round(revealedPercent * 100)}%`);
         
         if (revealedPercent >= 0.8 && !revealed80Logged) {
-          console.log("Достигнуто 80%! Меняем картинки...");
+          console.log("lyuboy");
           revealed80Logged = true;
-          backgroundChanged = true;
           
-          const event = new CustomEvent('maskComplete', { 
-            detail: { message: 'Маска заполнена' } 
-          });
-          window.dispatchEvent(event);
+          // Создаем контейнер с новыми картинками
+          if (!document.querySelector('.new-images-overlay')) {
+            const overlay = document.createElement('div');
+            overlay.className = 'new-images-overlay';
+            
+            const bgImg = document.createElement('img');
+            bgImg.src = "assets/images/bg-human.png";
+            bgImg.className = 'overlay-bg';
+            
+            const leftImg = document.createElement('img');
+            leftImg.src = "assets/images/left-part-human.png";
+            leftImg.className = 'overlay-left';
+            
+            const rightImg = document.createElement('img');
+            rightImg.src = "assets/images/right-part-human.png";
+            rightImg.className = 'overlay-right';
+            
+            overlay.appendChild(bgImg);
+            overlay.appendChild(leftImg);
+            overlay.appendChild(rightImg);
+            
+            document.querySelector('#canvas-parent').appendChild(overlay);
+          }
         }
         
         frameCounter = 0;
       }
       
-      // Выбираем какие картинки показывать
-      if (!backgroundChanged) {
-        // До заполнения: показываем оригинальную картинку
-        const maskedImg = img.get();
-        maskedImg.mask(maskLayer);
-        p.image(maskedImg, 0, 0, p.width, p.height);
-      } else {
-        // После заполнения: показываем 3 новые картинки
-        // Все три картинки накладываются друг на друга
-        const maskedImg3 = newImg3.get();
-        maskedImg3.mask(maskLayer);
-        p.image(maskedImg3, 0, 0, p.width, p.height);
-
-        const maskedImg1 = newImg1.get();
-        maskedImg1.mask(maskLayer);
-        p.image(maskedImg1, p.width * 0.1484, 0, p.width * 0.35, p.height * 0.99);
-        
-        const maskedImg2 = newImg2.get();
-        maskedImg2.mask(maskLayer);
-        p.image(maskedImg2, p.width * 0.5, 0, p.width * 0.35, p.height * 0.99);
-        
-      }
+      const maskedImg = img.get();
+      maskedImg.mask(maskLayer);
+      p.image(maskedImg, 0, 0, p.width, p.height);
     };
   
     p.windowResized = function () {
       p.resizeCanvas(window.innerWidth, window.innerHeight);
       initMaskLayer();
       revealed80Logged = false;
-      backgroundChanged = false;
       frameCounter = 0;
+      
+      const existingOverlay = document.querySelector('.new-images-overlay');
+      if (existingOverlay) {
+        existingOverlay.remove();
+      }
     };
   });
