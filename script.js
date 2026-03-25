@@ -1,7 +1,7 @@
 
 
 
-
+console.log('=== bed-3d.js ЗАГРУЗИЛСЯ ===')
 
 document.getElementById("nap-word").addEventListener("click", () => {
   if(document.querySelector(".active-sleep-box")) return;
