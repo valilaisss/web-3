@@ -98,15 +98,30 @@ const maskCircles = [
             
             document.querySelector('#canvas-parent').appendChild(overlay);
             
-            // Обработчики кликов для раздвигания
-            leftImg.addEventListener('click', () => {
-                leftImg.classList.add('slide-out');
-                rightImg.classList.add('slide-out');
-            });
-            rightImg.addEventListener('click', () => {
-                leftImg.classList.add('slide-out');
-                rightImg.classList.add('slide-out');
-            });
+            // Функция для добавления текстового блока
+            function addTextBetween() {
+                if (document.querySelector('.text-between')) return; // уже есть
+                const textDiv = document.createElement('div');
+                textDiv.className = 'text-between';
+                // Здесь можно вставить любой нужный текст
+                textDiv.innerHTML = `<p>Ваш текст здесь. Можно добавить любую информацию, которая должна появиться между разъехавшимися частями.</p>`;
+                overlay.appendChild(textDiv);
+                // Небольшая задержка для плавного появления после начала анимации
+                setTimeout(() => textDiv.classList.add('show'), 200);
+            }
+    
+    // Обработчики кликов
+    leftImg.addEventListener('click', () => {
+        leftImg.classList.add('slide-out');
+        rightImg.classList.add('slide-out');
+        addTextBetween();
+    });
+    rightImg.addEventListener('click', () => {
+        leftImg.classList.add('slide-out');
+        rightImg.classList.add('slide-out');
+        addTextBetween();
+    });
+}
         }
                 }
         

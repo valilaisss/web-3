@@ -507,3 +507,29 @@ canvas {
   width: 35.15625%;
   height: 100%;
 }
+
+
+/* Контейнер с текстом, появляющийся между картинками */
+.text-between {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30vw; /* ширина зазора после раздвигания */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    z-index: 20;
+    text-align: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1.2vw;
+    color: #3F3F3F;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.2s;
+    pointer-events: none; /* чтобы текст не мешал кликам, но при желании можно сделать кликабельным */
+}
+
+.text-between.show {
+    opacity: 1;
+}
