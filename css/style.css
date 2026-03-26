@@ -47,6 +47,7 @@ canvas {
     width: 100%;
     height: 100vh;
     position: relative;
+    overflow: hidden;
 }
 .illustration{
     top: 50%;
@@ -214,7 +215,7 @@ canvas {
     top: 100%;
     transform: translate(-50%, -100%);
     z-index: 10;
-    background-image: url('../assets/subtrate.svg');
+    background-image: url('../assets/images/subtrate.svg');
     background-position: center;
     background-size: 100% 100%; 
     background-repeat: no-repeat;
@@ -467,7 +468,6 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  filter: saturate(0)
 }
 
 
@@ -559,4 +559,31 @@ canvas {
     display: flex;
     align-items: flex-end;
     margin: 0;
+}
+.gray-element-2{
+    width: 77.812vw;
+    height: 51.41vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 19;
+    transform: translate(-50%, -50%);
+}
+
+.girl-left{
+    width: 53.33vw;
+    height: 31.67vw;
+    position: absolute;
+    top: 42.13%;
+    left: -13.1%;
+    z-index: 18;
+}
+
+.girl-right{
+    width: 53.33vw;
+    height: 31.67vw;
+    position: absolute;
+    top: 42.13%;
+    left: 59.27%;
+    z-index: 18;
 }
