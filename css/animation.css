@@ -47,30 +47,3 @@
     position: relative;
     /* остальные стили сохраняются */
 }
-
-.slide-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;  /* быстрая анимация */
-    z-index: 1;
-}
-
-.slide-content.active {
-    opacity: 1;
-    pointer-events: auto;
-    z-index: 2;
-}
-
-/* Цифры календаря и другие элементы, которые должны меняться резко */
-.mid-calendar-text p,
-.right-bottom-text,
-.date,
-.month,
-.left-bottom-text {
-    transition: none !important;
-}

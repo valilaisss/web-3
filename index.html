@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -15,11 +16,14 @@
     <!-- ================= FIRST SCREEN ================= -->
     <div class="first-screen" id="drawArea">
         <img src="assets/images/gray-element-1.svg" class="gray-element-1">
+
         <img src="assets/images/elipse.svg" class="elipse elipse-center">
         <img src="assets/images/elipse.svg" class="elipse elipse-left">
         <img src="assets/images/elipse.svg" class="elipse elipse-right">
+
         <img src="assets/images/elipse small.svg" class="elipse elipse-small-right">
         <img src="assets/images/elipse small.svg" class="elipse elipse-small-left">
+
         <div class="bg-nap">
             <p id="nap-word">сон</p>
         </div>
@@ -34,6 +38,7 @@
 
     <!-- ================= THIRD SCREEN ================= -->
     <div class="third-screen">
+
         <img class="illustration-new-mask" src="assets/images/mask-2.svg">
 
         <!-- OVERLAY -->
@@ -47,21 +52,19 @@
             <div class="slide-bg" style="background-image: url('assets/images/bg-slide-2.svg');"></div>
             <div class="slide-bg" style="background-image: url('assets/images/bg-slide-3.svg');"></div>
             <div class="slide-bg" style="background-image: url('assets/images/bg-slide-4.svg');"></div>
-        </div>
+</div>
         <div class="substrate">
 
-            <!-- Слайд 0 (катастрофа) -->
+            <!-- Слайд 1 -->
             <div class="slide-content" data-slide="0">
-                <div class="fade-content">
-                    <div class="catastrophe">
-                        <p>Катастрофы из-за депривации сна</p>
-                    </div>
-                    <img class="catastrophe-img" src="assets/images/catastrophe-img.svg">
+                <div class="catastrophe">
+                    <p>Катастрофы из-за депривации сна</p>
                 </div>
+                <img class="catastrophe-img" src="assets/images/catastrophe-img.svg">
             </div>
 
-            <!-- Слайд 1 -->
-            <div class="slide-content" data-slide="1">
+            <!-- Слайд 2 -->
+            <div class="slide-content" data-slide="1" style="display: none;">
                 <div class="calendar-container">
                     <div class="top-calendar-text">
                         <div class="date">1986</div>
@@ -78,20 +81,20 @@
                         <div class="right-bottom-text">28</div>
                     </div>
                 </div>
-                <div class="fade-content">
-                    <img class="inf-button" data-id="slide1" src="assets/images/gray-element.svg">
-                    <div class="hidden-text" id="slide1">
-                        <p>Решение о запуске принималось в ночь во время телеконференции<br>
+
+                <img class="inf-button" data-id="slide1" src="assets/images/gray-element.svg">
+
+                <div class="hidden-text" id="slide1">
+                    <p>Решение о запуске принималось в ночь во время телеконференции<br>
 между NASA и инженерами компании. Спор длился более 12 часов. Инженеры,<br> знавшие о рисках запуска при рекордно низкой температуре (-2), провели<br>
 практически бессонную ночь, пытаясь отменить старт. В состоянии<br>
  крайней усталости и под давлением графика, они<br>
 отозвали свои возражения.</p>
-                    </div>
                 </div>
             </div>
 
-            <!-- Слайд 2 -->
-            <div class="slide-content" data-slide="2">
+            <!-- Слайд 3 -->
+            <div class="slide-content" data-slide="2" style="display: none;">
                 <div class="calendar-container">
                     <div class="top-calendar-text">
                         <div class="date">1989</div>
@@ -108,19 +111,19 @@
                         <div class="right-bottom-text" style="left: 72.38%">24</div>
                     </div>
                 </div>
-                <div class="fade-content">
-                    <img class="inf-button" data-id="slide2" src="assets/images/gray-element.svg">
-                    <div class="hidden-text" id="slide2">
-                        <p>Третий помощник капитана, который в одиночку<br>
+
+                <img class="inf-button" data-id="slide2" src="assets/images/gray-element.svg">
+
+                <div class="hidden-text" id="slide2">
+                    <p>Третий помощник капитана, который в одиночку<br>
                         управлял судном в момент аварии, бодрствовал более 18 часов подряд. Он<br>
                         пропустил несколько сигналов об  отклонении от  курса,   а   его   реакция<br>
                         на опасность была запоздалой.</p>
-                    </div>
                 </div>
             </div>
 
-            <!-- Слайд 3 -->
-            <div class="slide-content" data-slide="3">
+            <!-- Слайд 4 -->
+            <div class="slide-content" data-slide="3" style="display: none;">
                 <div class="calendar-container">
                     <div class="top-calendar-text">
                         <div class="date">1986</div>
@@ -137,21 +140,21 @@
                         <div class="right-bottom-text" style="left: 79.60%">26</div>
                     </div>
                 </div>
-                <div class="fade-content">
-                    <img class="inf-button" data-id="slide3" src="assets/images/gray-element.svg">
-                    <div class="hidden-text" id="slide3">
-                        <p>Авария произошла в 1:23 ночи, во время эксперимента,<br>
+
+                <img class="inf-button" data-id="slide3" src="assets/images/gray-element.svg">
+
+                <div class="hidden-text" id="slide3">
+                    <p>Авария произошла в 1:23 ночи, во время эксперимента,<br>
                         которым управляла ночная смена. Персонал работал в пик сонливости,<br>
                         что закономерно снижало бдительность, скорость реакции и способность<br>
                         к комплексному анализу аварийной ситуации. Хроническое<br>
                         недосыпание, характерное для работников сменного<br>
                         труда, усугубило ситуацию.</p>
-                    </div>
                 </div>
             </div>
 
-            <!-- Слайд 4 -->
-            <div class="slide-content" data-slide="4">
+            <!-- Слайд 5 -->
+            <div class="slide-content" data-slide="4" style="display: none;">
                 <div class="calendar-container">
                     <div class="top-calendar-text">
                         <div class="date">1979</div>
@@ -168,16 +171,16 @@
                         <div class="right-bottom-text">28</div>
                     </div>
                 </div>
-                <div class="fade-content">
-                    <img class="inf-button" data-id="slide4" src="assets/images/gray-element.svg">
-                    <div class="hidden-text" id="slide4">
-                        <p>Авария началась около 4:00 утра — в это время мы сильнее всего<br>
+
+                <img class="inf-button" data-id="slide4" src="assets/images/gray-element.svg">
+
+                <div class="hidden-text" id="slide4">
+                    <p>Авария началась около 4:00 утра — в это время мы сильнее всего<br>
                         хотим спать, реакции замедлены,  внимание  рассеяно, а физические силы <br>
                         на минимуме. Операторы в ночную смену неправильно интерпретировали<br>
                          показания сотен датчиков на пульте, не смогли распознать открытый<br>
                         аварийный клапан и отключили аварийную систему<br>
                         охлаждения, усугубив расплавление.</p>
-                    </div>
                 </div>
             </div>
 
@@ -190,7 +193,7 @@
 
         </div>
     </div>
-    <!-- ================= FOURTH SCREEN ================= -->
+    <!-- ================= THOURTH SCREEN ================= -->
     <div class="fourth-screen">
         <div id="model-container"></div>
     </div>

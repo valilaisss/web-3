@@ -65,32 +65,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const bgSlides = document.querySelectorAll('.bg-container .slide-bg');
 
   function showSlide(index) {
-    // Закрываем overlay, если открыт
+
+    // скрываем overlay и восстанавливаем кнопку
     if (overlay.classList.contains('active')) overlay.classList.remove('active');
-    if (activeButton) {
-        activeButton.style.display = 'block';
-        activeButton = null;
-    }
+    if (activeButton) { activeButton.style.display = 'block'; activeButton = null; }
 
-    // Меняем активный класс у слайдов
-    slideContents.forEach((content, i) => {
-        content.classList.toggle('active', i === index);
-    });
-
-    // Меняем фон (быстро, без анимации – как было)
+    // ======== АНИМАЦИЯ ФОНА ========
     bgSlides.forEach((bg, i) => {
         bg.classList.toggle('active', i === index);
     });
 
-    // Обновляем номер страницы
+    // ======== Контент слайдов ========
+    slideContents.forEach((content, i) => {
+      content.style.display = i === index ? 'block' : 'none';
+    });
+
+    // Номер страницы
     pageNumber.textContent = `(${String(index).padStart(2, '0')})`;
 
-    // Позиция текста в overlay
+    // Позиция текста overlay
     const infoTextPositions = ['19.16%', '64.94%', '67.64%', '65%', '65%'];
-    if (textBox) textBox.style.top = infoTextPositions[index];
+    textBox.style.top = infoTextPositions[index];
 
     currentIndex = index;
-}
+  }
 
   // ===== Стрелки навигации =====
   document.querySelector('.arrow-left').onclick = () => {
