@@ -1,6 +1,11 @@
- document.addEventListener('DOMContentLoaded', () => {
+let controls;
+function changeZoom() {
+    controls.enableZoom = true;
+    controls.enableDamping = true;
+    }
+    document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('model-container');
-        
+        let zoomable = false;
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0xC9C9C9);
         
@@ -25,10 +30,10 @@
         scene.add(backLight);
         
         // Управление
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
         controls.enableZoom = false;
-        controls.enableDamping = true;
-        
+        controls.enableDamping = false;
+    
         // Загрузка модели (без тестового куба)
         const loader = new THREE.GLTFLoader();
         loader.load('assets/model-of-bed.glb',

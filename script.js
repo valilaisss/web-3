@@ -155,44 +155,35 @@ document.addEventListener('DOMContentLoaded', () => {
 // Элементы начинают движение только когда экран полностью виден,
 // и при дальнейшем скролле вниз уезжают в стороны/вверх.
 
+// ===== Обработка клика по надписи "не вреди — поспи" =====
 document.addEventListener('DOMContentLoaded', () => {
-    const fourthScreen = document.querySelector('.fourth-screen');
+    const napWordBed = document.getElementById('nap-word-box');
+    if (!napWordBed) return;
 
-    const napText = document.querySelector('#nap-word-bed');
-    const girlLeft = document.querySelector('.girl-left');
-    const girlRight = document.querySelector('.girl-right');
-    function updateFourthScreenScroll() {
-        const rect = fourthScreen.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const windowWidth = window.innerWidth;
+    napWordBed.addEventListener('click', () => {
+        // 1. Плавное исчезновение надписи
+        changeZoom();
+        napWordBed.style.transition = 'opacity 0.5s ease';
+        napWordBed.style.opacity = '0';
+        setTimeout(() => {
+            napWordBed.style.display = 'none';
+        }, 500);
 
-        // Прогресс: 0 – экран полностью виден (верхняя граница наверху или ниже)
-        //           1 – экран полностью ушел за верхний край
-        let progress = 0;
-        if (rect.top <= 0) {
-            // Сколько пикселей экрана скрыто сверху, делим на его высоту
-            const hiddenTop = Math.abs(Math.min(0, rect.top));
-            progress = Math.min(1, hiddenTop / rect.height);
+        // 2. Анимация ухода девочек
+        const leftGirl = document.querySelector('.girl-left');
+        const rightGirl = document.querySelector('.girl-right');
+        if (leftGirl && rightGirl) {
+            // Добавляем плавный переход
+            leftGirl.style.transition = 'transform 3s ease';
+            rightGirl.style.transition = 'transform 3s ease';
+            // Левая девочка уезжает влево, правая — вправо
+            leftGirl.style.transform = 'translateX(-100%)';
+            rightGirl.style.transform = 'translateX(100%)';
+            // После завершения анимации скрываем элементы (опционально)
+            setTimeout(() => {
+                leftGirl.style.display = 'none';
+                rightGirl.style.display = 'none';
+            }, 1000);
         }
-
-        const translateY = progress * windowHeight * 0.7;
-        const translateX = progress * windowWidth * 0.8;
-
-        if (napText) {
-            napText.style.transform = `translateY(-${translateY}px)`;
-            napText.style.opacity = 1 - progress;
-        }
-        if (girlLeft) {
-            girlLeft.style.transform = `translateX(-${translateX}px)`;
-            girlLeft.style.opacity = 1 - progress;
-        }
-        if (girlRight) {
-            girlRight.style.transform = `translateX(${translateX}px)`;
-            girlRight.style.opacity = 1 - progress;
-        }
-    }
-
-    window.addEventListener('scroll', updateFourthScreenScroll);
-    window.addEventListener('resize', updateFourthScreenScroll);
-    updateFourthScreenScroll();
+    });
 });
