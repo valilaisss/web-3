@@ -516,10 +516,7 @@ canvas {
     transform: translate(-50%, -50%);
     width: 0;                     /* начальная ширина 0 */
     overflow: hidden;             /* скрываем содержимое пока блок не расширится */
-    background: rgba(255, 255, 255, 0.95);
     padding: 0;                   /* начальный отступ 0 */
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     z-index: 20;
     text-align: justify;          /* ваше выравнивание */
     display: flex;
@@ -527,7 +524,9 @@ canvas {
     gap: 0;
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 1.2vw;
-    color: #3F3F3F;
+    color: #737373;
+    font-size: 1.35vw;
+    font-weight: 600;
     opacity: 0;
     pointer-events: none;
     transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1),
