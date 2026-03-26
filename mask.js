@@ -98,32 +98,29 @@ const maskCircles = [
             
             document.querySelector('#canvas-parent').appendChild(overlay);
             
-            // Функция для добавления текстового блока
+            // Функция добавления текстового блока между частями
             function addTextBetween() {
-                if (document.querySelector('.text-between')) return; // уже есть
-                const textDiv = document.createElement('div');
-                textDiv.className = 'text-between';
-                // Здесь можно вставить любой нужный текст
-                textDiv.innerHTML = `<p>Ваш текст здесь. Можно добавить любую информацию, которая должна появиться между разъехавшимися частями.</p>`;
-                overlay.appendChild(textDiv);
-                // Небольшая задержка для плавного появления после начала анимации
-                setTimeout(() => textDiv.classList.add('show'), 200);
+              if (document.querySelector('.text-between')) return;
+              const textDiv = document.createElement('div');
+              textDiv.className = 'text-between';
+              textDiv.innerHTML = `<p>Здесь может быть ваш текст. Информация о проекте, цитата или любой другой контент.</p>`;
+              overlay.appendChild(textDiv);
+              setTimeout(() => textDiv.classList.add('show'), 200);
             }
-    
-    // Обработчики кликов
-    leftImg.addEventListener('click', () => {
-        leftImg.classList.add('slide-out');
-        rightImg.classList.add('slide-out');
-        addTextBetween();
-    });
-    rightImg.addEventListener('click', () => {
-        leftImg.classList.add('slide-out');
-        rightImg.classList.add('slide-out');
-        addTextBetween();
-    });
-}
+            
+            // Обработчики клика по левой и правой части
+            leftImg.addEventListener('click', () => {
+              leftImg.classList.add('slide-out');
+              rightImg.classList.add('slide-out');
+              addTextBetween();
+            });
+            rightImg.addEventListener('click', () => {
+              leftImg.classList.add('slide-out');
+              rightImg.classList.add('slide-out');
+              addTextBetween();
+            });
+          }
         }
-                }
         
         frameCounter = 0;
       }
