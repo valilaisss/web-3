@@ -569,6 +569,8 @@ canvas {
     z-index: 19;
     transform: translate(-50%, -50%);
     touch-action: none;
+    user-select: none;
+    pointer-events: none;
 }
 
 .girl-left{
