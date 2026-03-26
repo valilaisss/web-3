@@ -26,6 +26,7 @@
         
         // Управление
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableZoom = false;
         controls.enableDamping = true;
         
         // Загрузка модели (без тестового куба)
