@@ -97,8 +97,20 @@ const maskCircles = [
             overlay.appendChild(rightImg);
             
             document.querySelector('#canvas-parent').appendChild(overlay);
-          }
+            
+            // Обработчики кликов для раздвигания
+            leftImg.addEventListener('click', () => {
+                leftImg.classList.add('slide-out');
+                rightImg.classList.add('slide-out');
+                setTimeout(() => overlay.remove(), 600);
+            });
+            rightImg.addEventListener('click', () => {
+                leftImg.classList.add('slide-out');
+                rightImg.classList.add('slide-out');
+                setTimeout(() => overlay.remove(), 600);
+            });
         }
+                }
         
         frameCounter = 0;
       }
