@@ -595,3 +595,23 @@ canvas {
     z-index: 18;
     pointer-events: none;
 }
+
+
+@media (max-width:1024px){
+    .first-screen{
+        width: 100%;
+        height: 50vh;
+    }
+    .second-screen{
+        width: 100%;
+        height: 50vh;
+    }
+    .third-screen{
+        width: 100%;
+        height: 50vh;
+    }
+    .fourth-screen{
+        width: 100%;
+        height: 50vh;
+    }
+}
