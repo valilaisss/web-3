@@ -27,12 +27,14 @@ canvas {
     align-items: center;
     justify-content: center;
     position:relative;
+    overflow-x: clip;
 
 }
 .second-screen{
     position: relative;
     height: 100vh;
     width: 100%;
+    overflow-x: clip;
 }
 .third-screen{
     width: 100%;
@@ -549,6 +551,7 @@ canvas {
 }
 
 #nap-word-bed {
+    cursor:pointer;
     font-size: 2.08vw;
     text-box-edge: cap alphabetic;
     text-box-trim: trim-both;

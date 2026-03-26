@@ -177,8 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
             leftGirl.style.transition = 'transform 3s ease';
             rightGirl.style.transition = 'transform 3s ease';
             // Левая девочка уезжает влево, правая — вправо
-            leftGirl.style.transform = 'translateX(-100%)';
-            rightGirl.style.transform = 'translateX(100%)';
+            leftGirl.style.transform = 'translateX(-150%)';
+            rightGirl.style.transform = 'translateX(150%)';
             // После завершения анимации скрываем элементы (опционально)
             setTimeout(() => {
                 leftGirl.style.display = 'none';
