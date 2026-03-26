@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeButton = null;
 
   // =====================
-  // 🔥 ПРЕДЗАГРУЗКА КАРТИНОК (без цикла)
+  // 🔥 ПРЕДЗАГРУЗКА (без цикла)
   // =====================
   const img1 = new Image();
   img1.src = 'assets/images/bg-screen-3.svg';
@@ -70,23 +70,29 @@ document.addEventListener('DOMContentLoaded', () => {
   img5.src = 'assets/images/bg-slide-4.svg';
 
   // =====================
-  // СЛАЙДЫ
+  // 🎬 ПЛАВНОЕ ПЕРЕКЛЮЧЕНИЕ
   // =====================
   function showSlide(index) {
 
     if (overlay.classList.contains('active')) {
       overlay.classList.remove('active');
     }
-    
+
     if (activeButton) {
       activeButton.style.display = 'block';
       activeButton = null;
     }
 
+    // фон
     thirdScreen.style.backgroundImage = backgrounds[index];
 
+    // 🔥 FADE анимация
     slideContents.forEach((content, i) => {
-      content.style.display = i === index ? 'block' : 'none';
+      if (i === index) {
+        content.classList.add('active');
+      } else {
+        content.classList.remove('active');
+      }
     });
 
     pageNumber.textContent = `(${String(index).padStart(2, '0')})`;
@@ -97,6 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
     currentIndex = index;
   }
 
+  // =====================
+  // КНОПКИ
+  // =====================
   document.querySelector('.arrow-left').onclick = () => {
     let newIndex = currentIndex - 1;
     if (newIndex < 0) newIndex = totalSlides - 1;
@@ -133,12 +142,13 @@ document.addEventListener('DOMContentLoaded', () => {
   closeBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     overlay.classList.remove('active');
-    
+
     if (activeButton) {
       activeButton.style.display = 'block';
       activeButton = null;
     }
   });
 
+  // старт
   showSlide(0);
 });

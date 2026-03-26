@@ -334,9 +334,17 @@ canvas {
     color: #3F3F3F;
 }
 .slide-content {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.slide-content.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .calendar-container{
