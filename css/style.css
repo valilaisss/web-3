@@ -523,7 +523,7 @@ canvas {
     flex-direction: column;
     gap: 0;
     font-family: 'IBM Plex Sans', sans-serif;
-    color: #737373;
+    color: #575757;
     font-size: 1.35vw;
     font-weight: 600;
     opacity: 0;
@@ -535,6 +535,6 @@ canvas {
 
 .text-between.show {
     width: 30vw;                  /* финальная ширина */
-    padding: 0.21vw;               /* финальные отступы */
+    padding: 0.15vw;               /* финальные отступы */
     opacity: 1;
 }
