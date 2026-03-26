@@ -98,7 +98,7 @@ const maskCircles = [
             
             document.querySelector('#canvas-parent').appendChild(overlay);
             
-            // Функция добавления текстового блока между частями
+            // Функция добавления текстового блока
             function addTextBetween() {
               if (document.querySelector('.text-between')) return;
               const textDiv = document.createElement('div');
@@ -107,7 +107,10 @@ const maskCircles = [
 и ожирением. Также отмечена связь недосыпа с пониженной мозговой активностью и даже, 
 в отдаленной перспективе, слабоумием.</p>`;
               overlay.appendChild(textDiv);
-              setTimeout(() => textDiv.classList.add('show'), 200);
+              // Запускаем анимацию расширения в следующем кадре, чтобы CSS transition сработал
+              requestAnimationFrame(() => {
+                textDiv.classList.add('show');
+              });
             }
             
             // Обработчики клика по левой и правой части

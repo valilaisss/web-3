@@ -508,28 +508,35 @@ canvas {
   height: 100%;
 }
 
-
-/* Контейнер с текстом, появляющийся между картинками */
+/* Текстовый блок, расширяющийся между картинками */
 .text-between {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30vw; /* ширина зазора после раздвигания */
+    width: 0;                     /* начальная ширина 0 */
+    overflow: hidden;             /* скрываем содержимое пока блок не расширится */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0;                   /* начальный отступ 0 */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     z-index: 20;
-    text-align: center;
+    text-align: justify;          /* ваше выравнивание */
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 1.2vw;
     color: #3F3F3F;
     opacity: 0;
-    transition: opacity 0.4s ease 0.2s;
-    pointer-events: none; /* чтобы текст не мешал кликам, но при желании можно сделать кликабельным */
-    text-align: justify;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+    pointer-events: none;
+    transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+                padding 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.3s ease;
 }
 
 .text-between.show {
+    width: 30vw;                  /* финальная ширина */
+    padding: 2rem;               /* финальные отступы */
     opacity: 1;
 }
