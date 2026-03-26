@@ -102,12 +102,12 @@ const maskCircles = [
             leftImg.addEventListener('click', () => {
                 leftImg.classList.add('slide-out');
                 rightImg.classList.add('slide-out');
-                setTimeout(() => overlay.remove(), 600);
+                setTimeout(() => overlay.remove(), 1200);
             });
             rightImg.addEventListener('click', () => {
                 leftImg.classList.add('slide-out');
                 rightImg.classList.add('slide-out');
-                setTimeout(() => overlay.remove(), 600);
+                setTimeout(() => overlay.remove(), 1200);
             });
         }
                 }
