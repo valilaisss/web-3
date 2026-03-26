@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalSlides = 5;
 
   const backgrounds = [
-    'url("assets/images/bg-screen-3.png")',
+    'url("assets/images/bg-screen-3.svg")',
     'url("assets/images/bg-slide-1.svg")',
     'url("assets/images/bg-slide-2.svg")',
     'url("assets/images/bg-slide-3.png")',
