@@ -36,7 +36,7 @@ const maskCircles = [
     }
   
     p.setup = async function () {
-      img = await p.loadImage("assets/images/draw-picture.svg");
+      img = await p.loadImage("assets/images/draw-picture.png");
       preloadImages();
       p.createCanvas(window.innerWidth, window.innerHeight).parent("#canvas-parent");
       initMaskLayer();
