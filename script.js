@@ -135,3 +135,68 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== ПОКАЗЫВАЕМ ПЕРВЫЙ СЛАЙД =====
   showSlide(0);
 });
+
+
+
+
+
+
+// ================= FOURTH SCREEN SCROLL ANIMATIONS =================
+// ================= FOURTH SCREEN SCROLL ANIMATIONS =================
+// Эффекты при скролле на четвертом экране:
+// - надпись "не вреди — поспи" уезжает вверх и исчезает
+// - левая девочка уезжает влево
+// - правая девочка уезжает вправо
+// Анимация начинается только после того, как экран полностью виден,
+// и продолжается при дальнейшем скролле вниз.
+
+// ================= FOURTH SCREEN SCROLL ANIMATIONS =================
+// ================= FOURTH SCREEN SCROLL ANIMATIONS =================
+// Элементы начинают движение только когда экран полностью виден,
+// и при дальнейшем скролле вниз уезжают в стороны/вверх.
+
+document.addEventListener('DOMContentLoaded', () => {
+    const fourthScreen = document.querySelector('.fourth-screen');
+    if (!fourthScreen) return;
+
+    const napText = document.querySelector('#nap-word-bed');
+    const girlLeft = document.querySelector('.girl-left');
+    const girlRight = document.querySelector('.girl-right');
+
+    if (!napText && !girlLeft && !girlRight) return;
+
+    function updateFourthScreenScroll() {
+        const rect = fourthScreen.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const windowWidth = window.innerWidth;
+
+        // Прогресс: 0 – экран полностью виден (верхняя граница наверху или ниже)
+        //           1 – экран полностью ушел за верхний край
+        let progress = 0;
+        if (rect.top <= 0) {
+            // Сколько пикселей экрана скрыто сверху, делим на его высоту
+            const hiddenTop = Math.abs(Math.min(0, rect.top));
+            progress = Math.min(1, hiddenTop / rect.height);
+        }
+
+        const translateY = progress * windowHeight * 0.7;
+        const translateX = progress * windowWidth * 0.8;
+
+        if (napText) {
+            napText.style.transform = `translateY(-${translateY}px)`;
+            napText.style.opacity = 1 - progress;
+        }
+        if (girlLeft) {
+            girlLeft.style.transform = `translateX(-${translateX}px)`;
+            girlLeft.style.opacity = 1 - progress;
+        }
+        if (girlRight) {
+            girlRight.style.transform = `translateX(${translateX}px)`;
+            girlRight.style.opacity = 1 - progress;
+        }
+    }
+
+    window.addEventListener('scroll', updateFourthScreenScroll);
+    window.addEventListener('resize', updateFourthScreenScroll);
+    updateFourthScreenScroll();
+});
