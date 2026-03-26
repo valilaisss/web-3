@@ -5,9 +5,9 @@
 }
 
 .overlay-left.slide-out {
-    transform: translateX(-5.16vw);
+    transform: translateX(-20vw);
 }
 
 .overlay-right.slide-out {
-    transform: translateX(65.73vw);
+    transform: translateX(11.51vw);
 }
