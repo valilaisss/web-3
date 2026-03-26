@@ -103,7 +103,9 @@ const maskCircles = [
               if (document.querySelector('.text-between')) return;
               const textDiv = document.createElement('div');
               textDiv.className = 'text-between';
-              textDiv.innerHTML = `<p>Здесь может быть ваш текст. Информация о проекте, цитата или любой другой контент.</p>`;
+              textDiv.innerHTML = `<p>Недостаток сна может привести к ряду заболеваний. Результаты 153 исследований с участием более пяти миллионов человек четко указывают на связь недостатка сна с диабетом, высоким давлением, заболеваниями сердечно-сосудистой системы, ишемической болезнью 
+и ожирением. Также отмечена связь недосыпа с пониженной мозговой активностью и даже, 
+в отдаленной перспективе, слабоумием.</p>`;
               overlay.appendChild(textDiv);
               setTimeout(() => textDiv.classList.add('show'), 200);
             }
