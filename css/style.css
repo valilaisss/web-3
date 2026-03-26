@@ -778,43 +778,5 @@ canvas {
         height: 290vw;         /* высота подстраивается под пропорции */
         object-fit: cover;
     }
-    .text-between {
-    z-index: 20;
-    text-align: justify;          /* ваше выравнивание */
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    font-family: 'IBM Plex Sans', sans-serif;
-    color: #575757;
-    font-size: 5vw;
-    font-weight: 600;
-    opacity: 0;
-    pointer-events: none;
-    transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1),
-                padding 1.2s cubic-bezier(0.25, 1, 0.5, 1),
-                opacity 0.3s ease;
-    }
-    .overlay-left {
-  position: absolute;
-  left: 14.84375%;
-  top: 0;
-  width: 35.15625%;
-  height: 100%;
-}
-
-.overlay-right {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 35.15625%;
-  height: 100%;
-}
-.overlay-left.slide-out {
-    transform: translateX(-25vw);
-}
-
-.overlay-right.slide-out {
-    transform: translateX(25vw);
-}
-
+    
 }
