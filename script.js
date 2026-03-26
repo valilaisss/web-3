@@ -1,3 +1,4 @@
+// =============== Нажатие на "сон" =================
 document.getElementById("nap-word").addEventListener("click", () => {
   if(document.querySelector(".active-sleep-box")) return;
 
@@ -28,6 +29,8 @@ document.getElementById("nap-word").addEventListener("click", () => {
   });
 });
 
+
+// ===================== DOMContentLoaded =====================
 document.addEventListener('DOMContentLoaded', () => {
 
   let currentIndex = 0;
@@ -51,61 +54,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let activeButton = null;
 
-  // =====================
-  // 🔥 ПРЕДЗАГРУЗКА (без цикла)
-  // =====================
-  const img1 = new Image();
-  img1.src = 'assets/images/bg-screen-3.svg';
+  // ===== ПРЕДЗАГРУЗКА КАРТИНОК (без цикла) =====
+  const img1 = new Image(); img1.src = 'assets/images/bg-screen-3.svg';
+  const img2 = new Image(); img2.src = 'assets/images/bg-slide-1.svg';
+  const img3 = new Image(); img3.src = 'assets/images/bg-slide-2.svg';
+  const img4 = new Image(); img4.src = 'assets/images/bg-slide-3.svg';
+  const img5 = new Image(); img5.src = 'assets/images/bg-slide-4.svg';
 
-  const img2 = new Image();
-  img2.src = 'assets/images/bg-slide-1.svg';
+  // ===== СМЕНА ФОНА ЧЕРЕЗ OPACITY =====
+  const bgSlides = document.querySelectorAll('.bg-container .slide-bg');
 
-  const img3 = new Image();
-  img3.src = 'assets/images/bg-slide-2.svg';
-
-  const img4 = new Image();
-  img4.src = 'assets/images/bg-slide-3.svg';
-
-  const img5 = new Image();
-  img5.src = 'assets/images/bg-slide-4.svg';
-
-  // =====================
-  // 🎬 ПЛАВНОЕ ПЕРЕКЛЮЧЕНИЕ
-  // =====================
   function showSlide(index) {
-
-    if (overlay.classList.contains('active')) {
-      overlay.classList.remove('active');
-    }
-
+    // Закрываем overlay, если открыт
+    if (overlay.classList.contains('active')) overlay.classList.remove('active');
     if (activeButton) {
-      activeButton.style.display = 'block';
-      activeButton = null;
+        activeButton.style.display = 'block';
+        activeButton = null;
     }
 
-    // фон
-    thirdScreen.style.backgroundImage = backgrounds[index];
-
-    // 🔥 FADE анимация
+    // Меняем активный класс у слайдов
     slideContents.forEach((content, i) => {
-      if (i === index) {
-        content.classList.add('active');
-      } else {
-        content.classList.remove('active');
-      }
+        content.classList.toggle('active', i === index);
     });
 
+    // Меняем фон (быстро, без анимации – как было)
+    bgSlides.forEach((bg, i) => {
+        bg.classList.toggle('active', i === index);
+    });
+
+    // Обновляем номер страницы
     pageNumber.textContent = `(${String(index).padStart(2, '0')})`;
 
+    // Позиция текста в overlay
     const infoTextPositions = ['19.16%', '64.94%', '67.64%', '65%', '65%'];
-    textBox.style.top = infoTextPositions[index];
+    if (textBox) textBox.style.top = infoTextPositions[index];
 
     currentIndex = index;
-  }
+}
 
-  // =====================
-  // КНОПКИ
-  // =====================
+  // ===== Стрелки навигации =====
   document.querySelector('.arrow-left').onclick = () => {
     let newIndex = currentIndex - 1;
     if (newIndex < 0) newIndex = totalSlides - 1;
@@ -118,9 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showSlide(newIndex);
   };
 
-  // =====================
-  // OVERLAY
-  // =====================
+  // ===== OVERLAY =====
   document.querySelectorAll('.inf-button').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -149,6 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // старт
+  // ===== ПОКАЗЫВАЕМ ПЕРВЫЙ СЛАЙД =====
   showSlide(0);
 });

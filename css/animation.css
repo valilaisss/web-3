@@ -11,3 +11,66 @@
 .overlay-right.slide-out {
     transform: translateX(15vw);
 }
+
+
+
+
+.bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.slide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 0;
+}
+
+.slide-bg.active {
+    opacity: 1;
+}
+
+/* Контейнер слайдов — позиционируем все слайды друг над другом */
+.substrate {
+    position: relative;
+    /* остальные стили сохраняются */
+}
+
+.slide-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;  /* быстрая анимация */
+    z-index: 1;
+}
+
+.slide-content.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+/* Цифры календаря и другие элементы, которые должны меняться резко */
+.mid-calendar-text p,
+.right-bottom-text,
+.date,
+.month,
+.left-bottom-text {
+    transition: none !important;
+}

@@ -30,7 +30,7 @@
         
         // Загрузка модели (без тестового куба)
         const loader = new THREE.GLTFLoader();
-        loader.load('assets/bed2.glb',
+        loader.load('assets/model-of-bed.glb',
             (gltf) => {
                 console.log('Модель загружена!');
                 gltf.scene.rotation.y = Math.PI;
