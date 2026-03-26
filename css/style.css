@@ -115,15 +115,23 @@ canvas {
     height: 23.18vw;
     z-index: 0;
 }
+
+.rings{
+    width: 58.85vw;
+    height: 29.43vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .elipse-center{
     position: absolute;
     width: 36vw;
     height: 36vw;
     z-index: 1;
-}
-.elipse{
     top: 50%;
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .elipse-right{
     position: absolute;
@@ -614,4 +622,59 @@ canvas {
         width: 100%;
         height: 50vh;
     }
+}
+
+@media(max-width: 360px){
+    .first-screen{
+        width: 100%;
+        height: 100vh;
+    }
+    .second-screen{
+        width: 100%;
+        height: 100vh;
+    }
+    .third-screen{
+        width: 100%;
+        height: 100vh;
+    }
+    .fourth-screen{
+        width: 100%;
+        height: 100vh;
+    }
+    .gray-element-1{
+        rotate: 90deg;
+    }
+    .rings{
+    transform: translate(-50%, -50%) rotate(90deg);
+    }
+    .gray-element-1{
+        width: 163.89vw;
+        height: 52.78vw;
+        object-fit: fill;
+    }
+    .active-sleep-box{
+        width:  70vw;
+        font-size: 3vw;
+        line-height: 3vw;
+        letter-spacing: -3%;
+    }
+    #nap-word{
+    font-size:  6vw;
+  }
+  .bg-nap{
+    font-size: 6vw;
+    height: 4vw;
+    font-weight: 600;
+    color: #3F3F3F;
+    background-color: #ffffff;
+    padding-bottom: 0.21vw;
+    display: flex;
+    align-items: flex-end;
+    }
+
+    .rings{
+        width: 166.11vw;
+        height: 82.78vw;
+    }
+   
 }
