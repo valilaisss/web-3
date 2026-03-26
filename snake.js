@@ -14,7 +14,7 @@ let lastX = 0;
 let lastY = 0;
 let isInside = false;
 let moved = false;
-let lastSpawnTime = 0; // время последнего спавна
+let lastSpawnTime = 0;
 const spawnInterval = 10; // миллисекунды между картинками
 
 drawArea.addEventListener("pointermove", (e) => {
@@ -37,11 +37,21 @@ function draw() {
     lastX += (mouseX - lastX) * 0.2;
     lastY += (mouseY - lastY) * 0.2;
 
+    // Получаем актуальные размеры родителя
+    const maxX = drawArea.clientWidth;
+    const maxY = drawArea.clientHeight;
+
+    // Ограничиваем координаты, чтобы штамп не выходил за пределы
+    let x = lastX - 20; // ширина штампа ~40px, корректируем
+    let y = lastY - 20;
+    x = Math.min(Math.max(x, 0), maxX - 40);
+    y = Math.min(Math.max(y, 0), maxY - 40);
+
     const img = document.createElement("img");
     img.src = sources[Math.floor(Math.random() * sources.length)];
     img.className = "stamp";
-    img.style.left = (lastX - 20) + "px";
-    img.style.top = (lastY - 20) + "px";
+    img.style.left = x + "px";
+    img.style.top = y + "px";
 
     drawArea.appendChild(img);
 
@@ -56,8 +66,8 @@ function draw() {
       setTimeout(() => img.remove(), 500);
     }, 2000);
 
-    lastSpawnTime = now; // обновляем время спавна
-    moved = false; // сброс флага движения
+    lastSpawnTime = now;
+    moved = false;
   }
 
   requestAnimationFrame(draw);

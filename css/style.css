@@ -609,6 +609,8 @@ canvas {
     .first-screen{
         width: 100%;
         height: 50vh;
+        overflow: hidden;
+        touch-action: pan-y; 
     }
     .second-screen{
         width: 100%;
@@ -712,5 +714,13 @@ canvas {
         position: absolute;
         top: 0;
         left: 0;
+    }
+
+    .illustration-new-bg,
+    .illustration-new-figure,
+    .illustration-new-mask {
+        width: 250vw; 
+        height: 290vw;         /* высота подстраивается под пропорции */
+        object-fit: cover;
     }
 }
