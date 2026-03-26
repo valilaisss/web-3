@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     napWordBed.addEventListener('click', () => {
         // 1. Плавное исчезновение надписи
         changeZoom();
-        napWordBed.style.transition = 'opacity 0.5s ease';
+        napWordBed.style.transition = 'opacity 0.3s ease';
         napWordBed.style.opacity = '0';
         setTimeout(() => {
             napWordBed.style.display = 'none';
