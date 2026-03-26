@@ -157,14 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const fourthScreen = document.querySelector('.fourth-screen');
-    if (!fourthScreen) return;
 
     const napText = document.querySelector('#nap-word-bed');
     const girlLeft = document.querySelector('.girl-left');
     const girlRight = document.querySelector('.girl-right');
-
-    if (!napText && !girlLeft && !girlRight) return;
-
     function updateFourthScreenScroll() {
         const rect = fourthScreen.getBoundingClientRect();
         const windowHeight = window.innerHeight;
