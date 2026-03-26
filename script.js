@@ -1,16 +1,18 @@
 document.getElementById("nap-word").addEventListener("click", () => {
   if(document.querySelector(".active-sleep-box")) return;
+
   const box = document.createElement("div");
   box.innerHTML = `
   <p style='text-align: justify; display: flex; flex-direction: column; gap: 0;'>
     --- не пассивное состояние, а активный
     нейробиологический процесс, выполняющий
     функции жизнеобеспечения, которые
-    невозможны в состоянии бодрствования. Это
+    невозможны в состоянии бодрствования. Это
     важнейшая физиологическая потребность,
-    сравнимая с дыханием и питанием.
+    сравнимая с дыханием и питанием.
   </p>
-  `
+  `;
+
   box.className = "active-sleep-box";
   drawArea.appendChild(box);
 
@@ -25,10 +27,6 @@ document.getElementById("nap-word").addEventListener("click", () => {
     setTimeout(() => box.remove(), 500);
   });
 });
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -51,14 +49,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const textBox = document.querySelector('.info-text');
   const closeBtn = document.querySelector('.close-button');
 
+  let activeButton = null;
+
+  // =====================
+  // 🔥 ПРЕДЗАГРУЗКА КАРТИНОК (без цикла)
+  // =====================
+  const img1 = new Image();
+  img1.src = 'assets/images/bg-screen-3.svg';
+
+  const img2 = new Image();
+  img2.src = 'assets/images/bg-slide-1.svg';
+
+  const img3 = new Image();
+  img3.src = 'assets/images/bg-slide-2.svg';
+
+  const img4 = new Image();
+  img4.src = 'assets/images/bg-slide-3.svg';
+
+  const img5 = new Image();
+  img5.src = 'assets/images/bg-slide-4.svg';
+
   // =====================
   // СЛАЙДЫ
   // =====================
-  let activeButton = null;
-
   function showSlide(index) {
 
-    // Скрываем overlay при переключении и возвращаем кнопку
     if (overlay.classList.contains('active')) {
       overlay.classList.remove('active');
     }
@@ -75,13 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     pageNumber.textContent = `(${String(index).padStart(2, '0')})`;
-    const infoTextPositions = ['19.16%;', '64.94%', '67.64%', '65%', '65%'];
+
+    const infoTextPositions = ['19.16%', '64.94%', '67.64%', '65%', '65%'];
     textBox.style.top = infoTextPositions[index];
+
     currentIndex = index;
   }
-
-
-  
 
   document.querySelector('.arrow-left').onclick = () => {
     let newIndex = currentIndex - 1;
@@ -116,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Закрытие по кнопке close-button
   closeBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     overlay.classList.remove('active');
