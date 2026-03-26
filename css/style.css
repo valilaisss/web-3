@@ -767,27 +767,20 @@ canvas {
         object-fit: cover;
     }
     .text-between {
-    z-index: 20;
-    text-align: justify;          /* ваше выравнивание */
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    font-family: 'IBM Plex Sans', sans-serif;
-    color: #575757;
-    font-size: 5vw;
-    font-weight: 600;
-    opacity: 0;
-    width: 50vw;
-    pointer-events: none;
-    transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1),
-                padding 1.2s cubic-bezier(0.25, 1, 0.5, 1),
-                opacity 0.3s ease;
+        /* не задаем ширину статически, только при появлении */
+        font-size: 4vw; /* адаптивный размер шрифта */
+        width: 0;
+        padding: 0;
+        white-space: normal; /* перенос строк */
+        word-wrap: break-word;
     }
-
+    .text-between.show {
+        width: 70vw; /* достаточно широкая область для текста */
+        padding: 2vw;
+    }
     .overlay-left.slide-out {
         transform: translateX(-25vw);
     }
-
     .overlay-right.slide-out {
         transform: translateX(25vw);
     }
